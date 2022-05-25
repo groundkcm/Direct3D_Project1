@@ -107,7 +107,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pTreeModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-20.0f, 5.0f, 80.0f);
+	pcarObject->SetPosition(-20.0f, 0.0f, 80.0f);
 	pcarObject->SetScale(4.5f, 4.5f, 4.5f);
 	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
 	m_ppGameObjects[3] = pcarObject;
