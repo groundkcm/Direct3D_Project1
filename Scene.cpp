@@ -70,14 +70,14 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 
 	BuildDefaultLightsAndMaterials();
 
-	m_nGameObjects = 3;
+	m_nGameObjects = 4;
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
-	CGameObject *pApacheModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
+	CGameObject * pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
 	CCarObject* pcarObject = NULL;
 
 	pcarObject = new CCarObject();
-	pcarObject->SetChild(pApacheModel, true);
+	pcarObject->SetChild(pPoliceCarModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(+130.0f, 0.0f, 160.0f);
 	pcarObject->SetScale(5.5f, 5.5f, 5.5f);
@@ -85,22 +85,32 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	m_ppGameObjects[0] = pcarObject;
 
 	pcarObject = new CCarObject();
-	pcarObject->SetChild(pApacheModel, true);
+	pcarObject->SetChild(pPoliceCarModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-75.0f, 0.0f, 80.0f);
 	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
 	pcarObject->Rotate(0.0f, -90.0f, 0.0f);
 	m_ppGameObjects[1] = pcarObject;
 
-	CGameObject* pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/OldCar.bin");
+	CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/OldCar.bin");
 
 	pcarObject = new CCarObject();
-	pcarObject->SetChild(pPoliceCarModel, true);
+	pcarObject->SetChild(pOldCarModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(135.0f, 40.0f, 220.0f);
-	pcarObject->SetScale(8.5f, 8.5f, 8.5f);
+	pcarObject->SetPosition(50.0f, 10.0f, 110.0f);
+	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
 	pcarObject->Rotate(0.0f, -90.0f, 0.0f);
 	m_ppGameObjects[2] = pcarObject;
+
+	CGameObject* pTreeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Tree.bin");
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pTreeModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(-20.0f, 5.0f, 80.0f);
+	pcarObject->SetScale(4.5f, 4.5f, 4.5f);
+	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	m_ppGameObjects[3] = pcarObject;
 
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
