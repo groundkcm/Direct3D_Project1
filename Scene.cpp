@@ -4,6 +4,7 @@
 
 #include "stdafx.h"
 #include "Scene.h"
+#define OBJECTNUM 10
 
 CScene::CScene()
 {
@@ -70,13 +71,13 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 
 	BuildDefaultLightsAndMaterials();
 
-	m_nGameObjects = 4;
+	m_nGameObjects = OBJECTNUM;
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
-	CGameObject * pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
+	//CGameObject * pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
 	CCarObject* pcarObject = NULL;
 
-	pcarObject = new CCarObject();
+	/*pcarObject = new CCarObject();
 	pcarObject->SetChild(pPoliceCarModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(+130.0f, 0.0f, 160.0f);
@@ -97,21 +98,32 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pOldCarModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(50.0f, 10.0f, 110.0f);
+	pcarObject->SetPosition(50.0f, 0.0f, 110.0f);
 	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
 	pcarObject->Rotate(0.0f, -90.0f, 0.0f);
-	m_ppGameObjects[2] = pcarObject;
+	m_ppGameObjects[2] = pcarObject;*/
 
-	CGameObject* pTreeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Rock2.bin");
+	CGameObject* pRockModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Rock2.bin");
 
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pTreeModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-50.0f, 0.0f, 80.0f);
-	pcarObject->SetScale(20.5f, 20.5f, 20.5f);
-	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	m_ppGameObjects[3] = pcarObject;
+	for (int i{}; i < OBJECTNUM; i+=2) {
+		pcarObject = new CCarObject();
+		pcarObject->SetChild(pRockModel, true);
+		pcarObject->OnInitialize();
+		pcarObject->SetScale(5.0f, 5.0f, 5.0f);
 
+		//m_ppGameObjects[i]->SetMesh(pCubeMesh);
+		static XMFLOAT3 prange{};
+		if (i < 10) {		//올라가기
+			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+			pcarObject->SetPosition(-5.0f, 0.0f, 0.0f);
+		}
+		m_ppGameObjects[i] = pcarObject;
+
+		pcarObject->SetPosition(5.0f, 0.0f, 0.0f);
+		m_ppGameObjects[i+1] = pcarObject;
+
+		//prange = pcarObject->GetPosition();
+	}
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
 }
