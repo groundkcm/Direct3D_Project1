@@ -70,7 +70,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 
 	BuildDefaultLightsAndMaterials();
 
-	m_nGameObjects = 2;
+	m_nGameObjects = 3;
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
 	CGameObject *pApacheModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
@@ -91,6 +91,17 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pApacheObject->SetScale(5.0f, 5.0f, 5.0f);
 	pApacheObject->Rotate(0.0f, -90.0f, 0.0f);
 	m_ppGameObjects[1] = pApacheObject;
+
+	CGameObject* pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/OldCar.bin");
+	CCarObject* pcarObject = NULL;
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pPoliceCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(135.0f, 40.0f, 220.0f);
+	pcarObject->SetScale(8.5f, 8.5f, 8.5f);
+	pcarObject->Rotate(0.0f, -90.0f, 0.0f);
+	m_ppGameObjects[2] = pcarObject;
 
 	/*CGameObject *pGunshipModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Gunship.bin");
 	CGunshipObject* pGunshipObject = NULL;
