@@ -71,7 +71,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 
 	BuildDefaultLightsAndMaterials();
 
-	m_nGameObjects = OBJECTNUM;
+	m_nGameObjects = 2;
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
 	//CGameObject * pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
@@ -104,26 +104,41 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	m_ppGameObjects[2] = pcarObject;*/
 
 	CGameObject* pRockModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Rock2.bin");
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pRockModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
+	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(-5.0f, 0.0f, 2.0f);
+	m_ppGameObjects[0] = pcarObject;
 
-	for (int i{}; i < OBJECTNUM; i+=2) {
-		pcarObject = new CCarObject();
-		pcarObject->SetChild(pRockModel, true);
-		pcarObject->OnInitialize();
-		pcarObject->SetScale(5.0f, 5.0f, 5.0f);
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pRockModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
+	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(5.0f, 0.0f, 2.0f);
+	m_ppGameObjects[1] = pcarObject;
 
-		//m_ppGameObjects[i]->SetMesh(pCubeMesh);
-		static XMFLOAT3 prange{};
-		if (i < 10) {		//올라가기
-			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-			pcarObject->SetPosition(-5.0f, 0.0f, 0.0f);
-		}
-		m_ppGameObjects[i] = pcarObject;
+	//for (int i{}; i < OBJECTNUM; i+=2) {
+	//	pcarObject = new CCarObject();
+	//	pcarObject->SetChild(pRockModel, true);
+	//	pcarObject->OnInitialize();
+	//	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
 
-		pcarObject->SetPosition(5.0f, 0.0f, 0.0f);
-		m_ppGameObjects[i+1] = pcarObject;
+	//	//m_ppGameObjects[i]->SetMesh(pCubeMesh);
+	//	static XMFLOAT3 prange{};
+	//	if (i < 10) {		//올라가기
+	//		pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	//		pcarObject->SetPosition(-5.0f, 0.0f, 0.0f);
+	//	}
+	//	m_ppGameObjects[i] = pcarObject;
 
-		//prange = pcarObject->GetPosition();
-	}
+	//	pcarObject->SetPosition(5.0f, 0.0f, 0.0f);
+	//	m_ppGameObjects[i+1] = pcarObject;
+
+	//	prange = pcarObject->GetPosition();
+	//}
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
 }
