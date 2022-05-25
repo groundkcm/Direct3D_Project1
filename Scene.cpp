@@ -198,7 +198,7 @@ bool CScene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam,
 
 bool CScene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam)
 {
-	switch (nMessageID)
+	/*switch (nMessageID)
 	{
 	case WM_KEYDOWN:
 		switch (wParam)
@@ -215,7 +215,7 @@ bool CScene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wPar
 		break;
 	default:
 		break;
-	}
+	}*/
 	return(false);
 }
 
