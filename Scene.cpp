@@ -102,13 +102,13 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->Rotate(0.0f, -90.0f, 0.0f);
 	m_ppGameObjects[2] = pcarObject;
 
-	CGameObject* pTreeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Tree.bin");
+	CGameObject* pTreeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Rock2.bin");
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pTreeModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-20.0f, 0.0f, 80.0f);
-	pcarObject->SetScale(4.5f, 4.5f, 4.5f);
+	pcarObject->SetPosition(-50.0f, 0.0f, 80.0f);
+	pcarObject->SetScale(20.5f, 20.5f, 20.5f);
 	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
 	m_ppGameObjects[3] = pcarObject;
 
