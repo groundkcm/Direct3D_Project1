@@ -70,7 +70,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 
 	BuildDefaultLightsAndMaterials();
 
-	m_nGameObjects = 5;
+	m_nGameObjects = 2;
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
 	CGameObject *pApacheModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Apache.bin");
@@ -92,7 +92,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pApacheObject->Rotate(0.0f, -90.0f, 0.0f);
 	m_ppGameObjects[1] = pApacheObject;
 
-	CGameObject *pGunshipModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Gunship.bin");
+	/*CGameObject *pGunshipModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Gunship.bin");
 	CGunshipObject* pGunshipObject = NULL;
 
 	pGunshipObject = new CGunshipObject();
@@ -123,7 +123,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pMi24Object->SetPosition(-95.0f, 50.0f, 50.0f);
 	pMi24Object->SetScale(4.5f, 4.5f, 4.5f);
 	pMi24Object->Rotate(0.0f, -90.0f, 0.0f);
-	m_ppGameObjects[4] = pMi24Object;
+	m_ppGameObjects[4] = pMi24Object;*/
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
 }
