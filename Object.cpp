@@ -707,6 +707,40 @@ void CHellicopterObject::Animate(float fTimeElapsed, XMFLOAT4X4 *pxmf4x4Parent)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //
+
+CRaceCarObject::CRaceCarObject()
+{
+}
+
+CRaceCarObject::~CRaceCarObject()
+{
+}
+
+void CRaceCarObject::OnInitialize()
+{
+}
+
+void CRaceCarObject::Animate(float fTimeElapsed, XMFLOAT4X4* pxmf4x4Parent)
+{
+	CGameObject::Animate(fTimeElapsed, pxmf4x4Parent);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+CCarObject::CCarObject()
+{
+}
+
+CCarObject::~CCarObject()
+{
+}
+
+void CCarObject::OnInitialize()
+{
+	
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
 CApacheObject::CApacheObject()
 {
 }

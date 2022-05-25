@@ -240,6 +240,27 @@ public:
 	virtual void Animate(float fTimeElapsed, XMFLOAT4X4 *pxmf4x4Parent = NULL);
 };
 
+class CRaceCarObject : public CGameObject
+{
+public:
+	CRaceCarObject();
+	virtual ~CRaceCarObject();
+
+public:
+	virtual void OnInitialize();
+	virtual void Animate(float fTimeElapsed, XMFLOAT4X4* pxmf4x4Parent = NULL);
+};
+
+class CCarObject : public CRaceCarObject
+{
+public:
+	CCarObject();
+	virtual ~CCarObject();
+
+public:
+	virtual void OnInitialize();
+};
+
 class CApacheObject : public CHellicopterObject
 {
 public:
