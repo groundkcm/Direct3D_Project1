@@ -73,14 +73,14 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	m_nGameObjects = 2;
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
-	CGameObject *pApacheModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Apache.bin");
+	CGameObject *pApacheModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
 	CApacheObject* pApacheObject = NULL;
 
 	pApacheObject = new CApacheObject();
 	pApacheObject->SetChild(pApacheModel, true);
 	pApacheObject->OnInitialize();
 	pApacheObject->SetPosition(+130.0f, 0.0f, 160.0f);
-	pApacheObject->SetScale(1.5f, 1.5f, 1.5f);
+	pApacheObject->SetScale(5.5f, 5.5f, 5.5f);
 	pApacheObject->Rotate(0.0f, 90.0f, 0.0f);
 	m_ppGameObjects[0] = pApacheObject;
 
@@ -88,7 +88,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pApacheObject->SetChild(pApacheModel, true);
 	pApacheObject->OnInitialize();
 	pApacheObject->SetPosition(-75.0f, 0.0f, 80.0f);
-	pApacheObject->SetScale(1.5f, 1.5f, 1.5f);
+	pApacheObject->SetScale(5.0f, 5.0f, 5.0f);
 	pApacheObject->Rotate(0.0f, -90.0f, 0.0f);
 	m_ppGameObjects[1] = pApacheObject;
 
