@@ -109,7 +109,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->OnInitialize();
 	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
 	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	pcarObject->SetPosition(-5.0f, 0.0f, 2.0f);
+	pcarObject->SetPosition(-20.0f, 0.0f, 2.0f);
 	m_ppGameObjects[0] = pcarObject;
 
 	pcarObject = new CCarObject();
@@ -117,7 +117,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->OnInitialize();
 	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
 	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	pcarObject->SetPosition(5.0f, 0.0f, 2.0f);
+	pcarObject->SetPosition(20.0f, 0.0f, 2.0f);
 	m_ppGameObjects[1] = pcarObject;
 
 	//for (int i{}; i < OBJECTNUM; i+=2) {

@@ -243,7 +243,7 @@ CAirplanePlayer::CAirplanePlayer(ID3D12Device *pd3dDevice, ID3D12GraphicsCommand
 	CGameObject *pGameObject = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, "Model/RallyCar.bin");
 
 	pGameObject->Rotate(15.0f, 0.0f, 0.0f);
-	pGameObject->SetScale(5.0f, 5.0f, 5.0f);
+	pGameObject->SetScale(2.0f, 2.0f, 2.0f);
 	SetChild(pGameObject, true);
 
 	OnInitialize();
