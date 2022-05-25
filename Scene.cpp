@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "Scene.h"
-#define OBJECTNUM 20
+#define OBJECTNUM 30
 
 CScene::CScene()
 {
@@ -118,26 +118,36 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 			if (!(i % 2)) {		//직진
 				pcarObject->Rotate(0.0f, 0.0f, 0.0f);
 				pcarObject->SetPosition(-20.0f, 0.0f, lrange.z + 7.0f);
-				lrange = pcarObject->GetPosition();
 			}
 			else {
 				pcarObject->Rotate(0.0f, 0.0f, 0.0f);
 				pcarObject->SetPosition(20.0f, 0.0f, rrange.z + 7.0f);
-				rrange = pcarObject->GetPosition();
 			}
 		}
 		else if (i < 20) {		//회전
 			if (!(i % 2)) {
 				pcarObject->Rotate(0.0f, -9.0f * (i - 10), 0.0f);
-				pcarObject->SetPosition(lrange.x - 0.5f, 0.0f, lrange.z + 1.0f);
-				lrange = pcarObject->GetPosition();
+				pcarObject->SetPosition(lrange.x - 3.5f, 0.0f, lrange.z + 5.0f);
 			}
 			else {
 				pcarObject->Rotate(0.0f, 9.0f * (i - 10), 0.0f);
-				pcarObject->SetPosition(rrange.x - 2.5f, 0.0f, rrange.z + 3.0f);
-				rrange = pcarObject->GetPosition();
+				pcarObject->SetPosition(rrange.x - 3.5f, 0.0f, rrange.z + 6.0f);
 			}
 		}
+		else if (i < 30) {		//직진
+			if (!(i % 2)) {
+				pcarObject->Rotate(0.0f, -90.0f, 0.0f);
+				pcarObject->SetPosition(lrange.x - 5.0f, 0.0f, lrange.z);
+			}
+			else {
+				pcarObject->Rotate(0.0f, -90.0f, 0.0f);
+				pcarObject->SetPosition(rrange.x - 5.0f, 0.0f, rrange.z);
+			}
+		}
+		if (!(i % 2)) 
+			lrange = pcarObject->GetPosition();
+		else 
+			rrange = pcarObject->GetPosition();
 		m_ppGameObjects[i] = pcarObject;
 	}
 
