@@ -404,6 +404,7 @@ void CGameFramework::BuildObjects()
 	pAirplanePlayer->SetPosition(XMFLOAT3(0.0f, 0.0f, 0.0f));
 	m_pScene->m_pPlayer = m_pPlayer = pAirplanePlayer;
 	m_pCamera = m_pPlayer->GetCamera();
+	m_pCamera->SetPosition(XMFLOAT3(0.0f, 2.0f, -1.0f));//?왜 다시뒤로 빠지지
 
 	m_pd3dCommandList->Close();
 	ID3D12CommandList *ppd3dCommandLists[] = { m_pd3dCommandList };

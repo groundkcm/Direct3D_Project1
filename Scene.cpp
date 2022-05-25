@@ -74,7 +74,6 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
 	CGameObject *pApacheModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
-	//CApacheObject* pApacheObject = NULL;
 	CCarObject* pcarObject = NULL;
 
 	pcarObject = new CCarObject();
@@ -103,38 +102,6 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->Rotate(0.0f, -90.0f, 0.0f);
 	m_ppGameObjects[2] = pcarObject;
 
-	/*CGameObject *pGunshipModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Gunship.bin");
-	CGunshipObject* pGunshipObject = NULL;
-
-	pGunshipObject = new CGunshipObject();
-	pGunshipObject->SetChild(pGunshipModel, true);
-	pGunshipObject->OnInitialize();
-	pGunshipObject->SetPosition(135.0f, 40.0f, 220.0f);
-	pGunshipObject->SetScale(8.5f, 8.5f, 8.5f);
-	pGunshipObject->Rotate(0.0f, -90.0f, 0.0f);
-	m_ppGameObjects[2] = pGunshipObject;
-
-	CGameObject *pSuperCobraModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/SuperCobra.bin");
-	CSuperCobraObject* pSuperCobraObject = NULL;
-
-	pSuperCobraObject = new CSuperCobraObject();
-	pSuperCobraObject->SetChild(pSuperCobraModel, true);
-	pSuperCobraObject->OnInitialize();
-	pSuperCobraObject->SetPosition(95.0f, 50.0f, 50.0f);
-	pSuperCobraObject->SetScale(4.5f, 4.5f, 4.5f);
-	pSuperCobraObject->Rotate(0.0f, -90.0f, 0.0f);
-	m_ppGameObjects[3] = pSuperCobraObject;
-
-	CGameObject *pMi24Model = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Mi24.bin");
-	CMi24Object* pMi24Object = NULL;
-
-	pMi24Object = new CMi24Object();
-	pMi24Object->SetChild(pMi24Model, true);
-	pMi24Object->OnInitialize();
-	pMi24Object->SetPosition(-95.0f, 50.0f, 50.0f);
-	pMi24Object->SetScale(4.5f, 4.5f, 4.5f);
-	pMi24Object->Rotate(0.0f, -90.0f, 0.0f);
-	m_ppGameObjects[4] = pMi24Object;*/
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
 }
