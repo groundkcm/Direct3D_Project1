@@ -5,7 +5,7 @@
 #include <random>
 #include "stdafx.h"
 #include "Scene.h"
-#define OBJECTNUM 7
+#define OBJECTNUM 11
 
 CScene::CScene()
 {
@@ -136,7 +136,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 
 	CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/OldCar.bin");
 
-	/*pcarObject = new CCarObject();
+	pcarObject = new CCarObject();
 	pcarObject->SetChild(pOldCarModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-40.0f, 0.0f, -300.0f);
@@ -166,7 +166,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(200.0f, 0.0f, -300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[10] = pcarObject;*/
+	m_ppGameObjects[10] = pcarObject;
 
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
@@ -293,10 +293,14 @@ bool CScene::ProcessInput(UCHAR *pKeysBuffer)
 void CScene::AnimateObjects(float fTimeElapsed)
 {
 	m_fElapsedTime = fTimeElapsed;
-
+	static XMFLOAT3 location{};
 	for (int i = 0; i < m_nGameObjects; i++) {
-		if (i >= 5)
+		if (i >= 5) {
+			location = m_ppGameObjects[i]->GetPosition();
+			if (location.z <= -400.0f)
+				m_ppGameObjects[i]->SetPosition(location.x, 0.0f, 500.0f);
 			m_ppGameObjects[i]->MoveForward(2.0f);
+		}
 		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
 	}
 
