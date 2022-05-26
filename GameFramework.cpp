@@ -1,9 +1,9 @@
 //-----------------------------------------------------------------------------
 // File: CGameFramework.cpp
 //-----------------------------------------------------------------------------
-
 #include "stdafx.h"
 #include "GameFramework.h"
+#include <algorithm>
 
 CGameFramework::CGameFramework()
 {
@@ -460,7 +460,10 @@ void CGameFramework::ProcessInput()
 				else
 					m_pPlayer->Rotate(cyDelta, cxDelta, 0.0f);
 			}
-			if (dwDirection) m_pPlayer->Move(dwDirection, 30.0f, true);
+			if (dwDirection) {
+				//clamp();
+				m_pPlayer->Move(dwDirection, 30.0f, true);
+			}
 		}
 	}
 	m_pPlayer->Update(m_GameTimer.GetTimeElapsed());
@@ -472,6 +475,9 @@ void CGameFramework::AnimateObjects()
 
 	if (m_pScene) m_pScene->AnimateObjects(fTimeElapsed);
 
+	XMFLOAT3 temp = m_pPlayer->GetPosition();
+	if (temp.x <= -200.0f || temp.x >= 180.0f)
+		m_pPlayer->SetPosition(XMFLOAT3(std::clamp(temp.x, -230.0f, 210.0f), temp.y, temp.z));
 	m_pPlayer->Animate(fTimeElapsed, NULL);
 }
 

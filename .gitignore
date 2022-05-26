@@ -362,3 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 *.ipch
+*.ipch
+.vs/LabProject07-9-1/v16/ipch/ca89092bb611fe6f.ipch
+*.ipch
