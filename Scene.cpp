@@ -1,10 +1,9 @@
 //-----------------------------------------------------------------------------
 // File: CScene.cpp
 //-----------------------------------------------------------------------------
-
-#include <random>
 #include "stdafx.h"
 #include "Scene.h"
+#include <random>
 #define OBJECTNUM 11
 
 CScene::CScene()
@@ -64,8 +63,9 @@ void CScene::BuildDefaultLightsAndMaterials()
 	m_pLights[3].m_fTheta = (float)cos(XMConvertToRadians(30.0f));
 }
 
-//std::random_device rd;
-//std::default_random_engine dre(rd());
+random_device rd;
+default_random_engine dre{ rd() }; 
+uniform_int_distribution<int> uid(1, 6);
 
 void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *pd3dCommandList)
 {
@@ -115,16 +115,38 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 		m_ppGameObjects[i] = pcarObject;
 	}
 
-	CGameObject* pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
-	//std::uniform_int_distribution<int> uid( 1, 6 );
+	CGameObject* pAmbulanceModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Ambulance.bin");
+	int choice{ uid(dre) };
+	float lane{};
+	switch (choice) {
+	case 1:
+		lane = -200.0f;
+		break;
+	case 2:
+		lane = -120.0f;
+		break;
+	case 3:
+		lane = -40.0f;
+		break;
+	case 4:
+		lane = 40.0f;
+		break;
+	case 5:
+		lane = 120.0f;
+		break;
+	default:
+		lane = 200.0f;
+	}
 
 	pcarObject = new CCarObject();
-	pcarObject->SetChild(pPoliceCarModel, true);
+	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-200.0f, 0.0f, 100.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	m_ppGameObjects[5] = pcarObject;
+
+	CGameObject* pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pPoliceCarModel, true);
@@ -134,7 +156,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	m_ppGameObjects[6] = pcarObject;
 
-	CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/OldCar.bin");
+	CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/SportCar.bin");
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pOldCarModel, true);
@@ -152,8 +174,10 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	m_ppGameObjects[8] = pcarObject;
 
+	CGameObject* pForkModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Fork.bin");
+
 	pcarObject = new CCarObject();
-	pcarObject->SetChild(pOldCarModel, true);
+	pcarObject->SetChild(pForkModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(120.0f, 0.0f, -300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
@@ -161,7 +185,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	m_ppGameObjects[9] = pcarObject;
 
 	pcarObject = new CCarObject();
-	pcarObject->SetChild(pOldCarModel, true);
+	pcarObject->SetChild(pForkModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(200.0f, 0.0f, -300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
@@ -295,10 +319,31 @@ void CScene::AnimateObjects(float fTimeElapsed)
 	m_fElapsedTime = fTimeElapsed;
 	static XMFLOAT3 location{};
 	for (int i = 0; i < m_nGameObjects; i++) {
+		int choice{ uid(dre) };
+		float lane{};
+		switch (choice) {
+		case 1:
+			lane = -200.0f;
+			break;
+		case 2:
+			lane = -120.0f;
+			break;
+		case 3:
+			lane = -40.0f;
+			break;
+		case 4:
+			lane = 40.0f;
+			break;
+		case 5:
+			lane = 120.0f;
+			break;
+		default:
+			lane = 200.0f;
+		}
 		if (i >= 5) {
 			location = m_ppGameObjects[i]->GetPosition();
 			if (location.z <= -400.0f)
-				m_ppGameObjects[i]->SetPosition(location.x, 0.0f, 500.0f);
+				m_ppGameObjects[i]->SetPosition(lane, 0.0f, 500.0f);
 			m_ppGameObjects[i]->MoveForward(2.0f);
 		}
 		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
