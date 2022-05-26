@@ -317,8 +317,10 @@ CCamera *CAirplanePlayer::ChangeCamera(DWORD nNewCameraMode, float fTimeElapsed)
 		case THIRD_PERSON_CAMERA:
 			SetFriction(100.5f);
 			SetGravity(XMFLOAT3(0.0f, 0.0f, 0.0f));
-			SetMaxVelocityXZ(25.5f);
-			SetMaxVelocityY(40.0f);
+			//SetMaxVelocityXZ(25.5f);
+			SetMaxVelocityXZ(100.5f);
+			SetMaxVelocityY(100.0f);
+			//SetMaxVelocityY(40.0f);
 			m_pCamera = OnChangeCamera(THIRD_PERSON_CAMERA, nCurrentCameraMode);
 			m_pCamera->SetTimeLag(0.25f);
 			m_pCamera->SetOffset(XMFLOAT3(0.0f, 100.0f, -140.0f));

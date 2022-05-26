@@ -81,7 +81,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetChild(pPoliceCarModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(+0.0f, 0.0f, 40.0f);
-	pcarObject->SetScale(100.0f, 100.0f, 100.0f);
+	pcarObject->SetScale(50.0f, 100.0f, 100.0f);
 	pcarObject->Rotate(0.0f, 90.0f, 0.0f);
 	m_ppGameObjects[0] = pcarObject;
 
