@@ -2,9 +2,10 @@
 // File: CScene.cpp
 //-----------------------------------------------------------------------------
 
+#include <random>
 #include "stdafx.h"
 #include "Scene.h"
-#define OBJECTNUM 11
+#define OBJECTNUM 7
 
 CScene::CScene()
 {
@@ -63,6 +64,9 @@ void CScene::BuildDefaultLightsAndMaterials()
 	m_pLights[3].m_fTheta = (float)cos(XMConvertToRadians(30.0f));
 }
 
+//std::random_device rd;
+//std::default_random_engine dre(rd());
+
 void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *pd3dCommandList)
 {
 	m_pd3dGraphicsRootSignature = CreateGraphicsRootSignature(pd3dDevice);
@@ -112,11 +116,12 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	}
 
 	CGameObject* pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
+	//std::uniform_int_distribution<int> uid( 1, 6 );
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pPoliceCarModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-200.0f, 0.0f, -300.0f);
+	pcarObject->SetPosition(-200.0f, 0.0f, 100.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	m_ppGameObjects[5] = pcarObject;
@@ -124,14 +129,14 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pPoliceCarModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-120.0f, 0.0f, -300.0f);
+	pcarObject->SetPosition(-120.0f, 0.0f, 100.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	m_ppGameObjects[6] = pcarObject;
 
 	CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/OldCar.bin");
 
-	pcarObject = new CCarObject();
+	/*pcarObject = new CCarObject();
 	pcarObject->SetChild(pOldCarModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-40.0f, 0.0f, -300.0f);
@@ -161,7 +166,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(200.0f, 0.0f, -300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[10] = pcarObject;
+	m_ppGameObjects[10] = pcarObject;*/
 
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
@@ -289,7 +294,11 @@ void CScene::AnimateObjects(float fTimeElapsed)
 {
 	m_fElapsedTime = fTimeElapsed;
 
-	for (int i = 0; i < m_nGameObjects; i++) m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
+	for (int i = 0; i < m_nGameObjects; i++) {
+		if (i >= 5)
+			m_ppGameObjects[i]->MoveForward(2.0f);
+		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
+	}
 
 	if (m_pLights)
 	{
