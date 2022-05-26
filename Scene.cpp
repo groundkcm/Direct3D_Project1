@@ -104,62 +104,30 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	m_ppGameObjects[2] = pcarObject;*/
 
 	CGameObject* pRockModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Cube.bin");
-	
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pRockModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
-	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	pcarObject->SetPosition(-250.0f, 0.0f, -150.0f);
-	m_ppGameObjects[1] = pcarObject;
 
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pRockModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
-	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	pcarObject->SetPosition(250.0f, 0.0f, -150.0f);
-	m_ppGameObjects[2] = pcarObject;
-
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pRockModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
-	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	pcarObject->SetPosition(-250.0f, 0.0f, 350.0f);
-	m_ppGameObjects[3] = pcarObject;
-
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pRockModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
-	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	pcarObject->SetPosition(250.0f, 0.0f, 350.0f);
-	m_ppGameObjects[4] = pcarObject;
-
-	//for (int i{1}; i < OBJECTNUM; ++i) {
-	//	pcarObject = new CCarObject();
-	//	pcarObject->SetChild(pRockModel, true);
-	//	pcarObject->OnInitialize();
-	//	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
-
-	//	//m_ppGameObjects[i]->SetMesh(pCubeMesh);
-	//	static XMFLOAT3 lrange = XMFLOAT3(0.0f, 0.0f, -150.0f);
-	//	static XMFLOAT3 rrange = XMFLOAT3(0.0f, 0.0f, -150.0f);
-	//	if (!(i % 2)) {		//Á÷Áø
-	//		pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	//		pcarObject->SetPosition(-250.0f, 0.0f, lrange.z + 20.0f);
-	//	}
-	//	else {
-	//		pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	//		pcarObject->SetPosition(250.0f, 0.0f, rrange.z + 20.0f);
-	//	}
-	//	if (!(i % 2)) 
-	//		lrange = pcarObject->GetPosition();
-	//	else 
-	//		rrange = pcarObject->GetPosition();
-	//	m_ppGameObjects[i] = pcarObject;
-	//}
+	for (int i{ 1 }; i < 5; ++i) {
+		pcarObject = new CCarObject();
+		pcarObject->SetChild(pRockModel, true);
+		pcarObject->OnInitialize();
+		pcarObject->SetScale(10.0f, 10.0f, 500.0f);
+		if (i == 1) {
+			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+			pcarObject->SetPosition(-250.0f, 0.0f, -150.0f);
+		}
+		else if (i == 2) {
+			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+			pcarObject->SetPosition(250.0f, 0.0f, -150.0f);
+		}
+		else if (i == 3) {
+			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+			pcarObject->SetPosition(-250.0f, 0.0f, 350.0f);
+		}
+		else {
+			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+			pcarObject->SetPosition(250.0f, 0.0f, 350.0f);
+		}
+		m_ppGameObjects[i] = pcarObject;
+	}
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
 }
