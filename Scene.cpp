@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "Scene.h"
-#define OBJECTNUM 5
+#define OBJECTNUM 7
 
 CScene::CScene()
 {
@@ -74,34 +74,16 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	m_nGameObjects = OBJECTNUM;
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
-	CGameObject * pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Plane.bin");
 	CCarObject* pcarObject = NULL;
+	CGameObject * pPlaneModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Plane.bin");
 
 	pcarObject = new CCarObject();
-	pcarObject->SetChild(pPoliceCarModel, true);
+	pcarObject->SetChild(pPlaneModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(+0.0f, 0.0f, 40.0f);
 	pcarObject->SetScale(50.0f, 100.0f, 100.0f);
 	pcarObject->Rotate(0.0f, 90.0f, 0.0f);
 	m_ppGameObjects[0] = pcarObject;
-
-	/*pcarObject = new CCarObject();
-	pcarObject->SetChild(pPoliceCarModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-75.0f, 0.0f, 80.0f);
-	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
-	pcarObject->Rotate(0.0f, -90.0f, 0.0f);
-	m_ppGameObjects[1] = pcarObject;
-
-	CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/OldCar.bin");
-
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pOldCarModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(50.0f, 0.0f, 110.0f);
-	pcarObject->SetScale(5.0f, 5.0f, 5.0f);
-	pcarObject->Rotate(0.0f, -90.0f, 0.0f);
-	m_ppGameObjects[2] = pcarObject;*/
 
 	CGameObject* pRockModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Cube.bin");
 
@@ -128,6 +110,27 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 		}
 		m_ppGameObjects[i] = pcarObject;
 	}
+
+	CGameObject* pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pPoliceCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(-200.0f, 0.0f, 0.0f);
+	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[5] = pcarObject;
+
+	CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/OldCar.bin");
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pOldCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(100.0f, 0.0f, -300.0f);
+	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[6] = pcarObject;
+
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
 }
