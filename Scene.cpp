@@ -74,14 +74,14 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	m_nGameObjects = 1;
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
-	CGameObject * pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Plane.bin");
+	CGameObject * pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Sphere.bin");
 	CCarObject* pcarObject = NULL;
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pPoliceCarModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(+50.0f, 0.0f, 40.0f);
-	pcarObject->SetScale(30.0f, 30.0f, 30.0f);
+	pcarObject->SetPosition(+0.0f, 0.0f, 40.0f);
+	pcarObject->SetScale(2.0f, 2.0f, 2.0f);
 	pcarObject->Rotate(0.0f, 90.0f, 0.0f);
 	m_ppGameObjects[0] = pcarObject;
 
