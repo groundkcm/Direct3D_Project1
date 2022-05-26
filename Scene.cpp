@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "Scene.h"
-#define OBJECTNUM 11
+#define OBJECTNUM 5
 
 CScene::CScene()
 {
@@ -71,7 +71,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 
 	BuildDefaultLightsAndMaterials();
 
-	m_nGameObjects = 11;
+	m_nGameObjects = OBJECTNUM;
 	m_ppGameObjects = new CGameObject*[m_nGameObjects];
 
 	CGameObject * pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Plane.bin");
@@ -105,51 +105,61 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 
 	CGameObject* pRockModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Cube.bin");
 	
-	for (int i{1}; i < OBJECTNUM; ++i) {
-		pcarObject = new CCarObject();
-		pcarObject->SetChild(pRockModel, true);
-		pcarObject->OnInitialize();
-		pcarObject->SetScale(6.0f, 6.0f, 10.0f);
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pRockModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
+	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(-250.0f, 0.0f, -150.0f);
+	m_ppGameObjects[1] = pcarObject;
 
-		//m_ppGameObjects[i]->SetMesh(pCubeMesh);
-		static XMFLOAT3 lrange{};
-		static XMFLOAT3 rrange{};
-		if (i < 10) {
-			if (!(i % 2)) {		//직진
-				pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-				pcarObject->SetPosition(-120.0f, 0.0f, lrange.z + 10.0f);
-			}
-			else {
-				pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-				pcarObject->SetPosition(120.0f, 0.0f, rrange.z + 10.0f);
-			}
-		}
-		else if (i < 20) {		//회전
-			if (!(i % 2)) {
-				pcarObject->Rotate(0.0f, -9.0f * (i - 10), 0.0f);
-				pcarObject->SetPosition(lrange.x - 3.5f, 0.0f, lrange.z + 5.0f);
-			}
-			else {
-				pcarObject->Rotate(0.0f, 9.0f * (i - 10), 0.0f);
-				pcarObject->SetPosition(rrange.x - 3.5f, 0.0f, rrange.z + 6.0f);
-			}
-		}
-		else if (i < 30) {		//직진
-			if (!(i % 2)) {
-				pcarObject->Rotate(0.0f, -90.0f, 0.0f);
-				pcarObject->SetPosition(lrange.x - 5.0f, 0.0f, lrange.z);
-			}
-			else {
-				pcarObject->Rotate(0.0f, -90.0f, 0.0f);
-				pcarObject->SetPosition(rrange.x - 5.0f, 0.0f, rrange.z);
-			}
-		}
-		if (!(i % 2)) 
-			lrange = pcarObject->GetPosition();
-		else 
-			rrange = pcarObject->GetPosition();
-		m_ppGameObjects[i] = pcarObject;
-	}
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pRockModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
+	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(250.0f, 0.0f, -150.0f);
+	m_ppGameObjects[2] = pcarObject;
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pRockModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
+	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(-250.0f, 0.0f, 350.0f);
+	m_ppGameObjects[3] = pcarObject;
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pRockModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
+	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(250.0f, 0.0f, 350.0f);
+	m_ppGameObjects[4] = pcarObject;
+
+	//for (int i{1}; i < OBJECTNUM; ++i) {
+	//	pcarObject = new CCarObject();
+	//	pcarObject->SetChild(pRockModel, true);
+	//	pcarObject->OnInitialize();
+	//	pcarObject->SetScale(10.0f, 10.0f, 500.0f);
+
+	//	//m_ppGameObjects[i]->SetMesh(pCubeMesh);
+	//	static XMFLOAT3 lrange = XMFLOAT3(0.0f, 0.0f, -150.0f);
+	//	static XMFLOAT3 rrange = XMFLOAT3(0.0f, 0.0f, -150.0f);
+	//	if (!(i % 2)) {		//직진
+	//		pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	//		pcarObject->SetPosition(-250.0f, 0.0f, lrange.z + 20.0f);
+	//	}
+	//	else {
+	//		pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	//		pcarObject->SetPosition(250.0f, 0.0f, rrange.z + 20.0f);
+	//	}
+	//	if (!(i % 2)) 
+	//		lrange = pcarObject->GetPosition();
+	//	else 
+	//		rrange = pcarObject->GetPosition();
+	//	m_ppGameObjects[i] = pcarObject;
+	//}
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
 }
