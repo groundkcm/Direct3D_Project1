@@ -344,7 +344,7 @@ void CScene::AnimateObjects(float fTimeElapsed)
 			location = m_ppGameObjects[i]->GetPosition();
 			if (location.z <= -450.0f)
 				m_ppGameObjects[i]->SetPosition(lane, 0.0f, 500.0f);
-			m_ppGameObjects[i]->MoveForward(2.0f);
+			m_ppGameObjects[i]->MoveForward(3.5f);
 		}
 		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
 	}
