@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "Scene.h"
-#define OBJECTNUM 7
+#define OBJECTNUM 11
 
 CScene::CScene()
 {
@@ -116,20 +116,52 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pPoliceCarModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-200.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(-200.0f, 0.0f, -300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	m_ppGameObjects[5] = pcarObject;
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pPoliceCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(-120.0f, 0.0f, -300.0f);
+	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[6] = pcarObject;
 
 	CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/OldCar.bin");
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pOldCarModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(100.0f, 0.0f, -300.0f);
+	pcarObject->SetPosition(-40.0f, 0.0f, -300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[6] = pcarObject;
+	m_ppGameObjects[7] = pcarObject;
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pOldCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(40.0f, 0.0f, -300.0f);
+	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[8] = pcarObject;
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pOldCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(120.0f, 0.0f, -300.0f);
+	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[9] = pcarObject;
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pOldCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(200.0f, 0.0f, -300.0f);
+	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[10] = pcarObject;
 
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
