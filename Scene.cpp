@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 #include <random>
-#define OBJECTNUM 44
+#define OBJECTNUM 47
 
 CScene::CScene()
 {
@@ -74,7 +74,7 @@ void CScene::BuildDefaultLightsAndMaterials()
 
 random_device rd;
 default_random_engine dre{ rd() }; 
-uniform_int_distribution<int> uid(1, 6);
+uniform_int_distribution<int> uid(1, 3);
 
 void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *pd3dCommandList)
 {
@@ -173,7 +173,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-40.0f, 0.0f, -200.0f);
+	pcarObject->SetPosition(40.0f, 0.0f, -200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-40.0f, 0.0f, -200.0f), XMFLOAT3(40.0f, 40.0f, 140.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
@@ -182,21 +182,21 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(40.0f, 0.0f, -200.0f);
+	pcarObject->SetPosition(40.0f, 0.0f, 200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, -200.0f), XMFLOAT3(40.0f, 40.0f, 140.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[43] = pcarObject;
 
-
-	/*pcarObject = new CCarObject();
+	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-40.0f, 0.0f, -100.0f);
+	pcarObject->SetPosition(120.0f, 0.0f, 0.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[7] = pcarObject;
+	m_ppGameObjects[44] = pcarObject;
 
+	//-------------------------------------- 방향전환
 	CGameObject* pPoliceCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/PoliceCar.bin");
 
 	pcarObject = new CCarObject();
@@ -204,18 +204,18 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-120.0f, 0.0f, 100.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[8] = pcarObject;
+	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[45] = pcarObject;
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pPoliceCarModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(40.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(-40.0f, 0.0f, 0.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[9] = pcarObject;
+	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[46] = pcarObject;
 
-	CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/SportCar.bin");
+	/*CGameObject* pOldCarModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/SportCar.bin");
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pOldCarModel, true);
@@ -421,35 +421,31 @@ void CScene::AnimateObjects(float fTimeElapsed)
 		float lane{};
 		switch (choice) {
 		case 1:
-			lane = -200.0f;
+			lane = 200.0f;
 			break;
 		case 2:
-			lane = -120.0f;
-			break;
-		case 3:
-			lane = -40.0f;
-			break;
-		case 4:
-			lane = 40.0f;
-			break;
-		case 5:
 			lane = 120.0f;
 			break;
 		default:
-			lane = 200.0f;
+			lane = 40.0f;
 		}
 		if (i >= 6 && m_pPlayer->start) {		// 랜덤위치 이동생성
 			location = m_ppGameObjects[i]->GetPosition();
 			if (location.z < -450.0f) {
-				if (i < 42) 
+				if (i < 42)
 					m_ppGameObjects[i]->SetPosition(location.x, 0.0f, 850.0f);
-				else if (i >= 42)
+				else if (i < 45)
 					m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
+				else 
+					m_ppGameObjects[i]->SetPosition(-lane, 0.0f, 850.0f);
 			}
 			if (i < 42)
 				m_ppGameObjects[i]->MoveForward(2.5f);
-			else if (i >= 42)
+			else if (i < 45)
 				m_ppGameObjects[i]->MoveForward(4.0f);
+			else 
+				m_ppGameObjects[i]->MoveForward(-1.5f);
+			
 		}
 		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
 	}
