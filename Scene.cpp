@@ -134,11 +134,11 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(0.0f, 0.0f, -50.0f);
 	m_ppGameObjects[5] = pcarObject;
 
-	pCubeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Cube.bin");
+	CGameObject* pWhiteCubeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/WhiteCube.bin");
 
 	for (int i{ 6 }; i < 38; ++i) {
 		pcarObject = new CCarObject();
-		pcarObject->SetChild(pCubeModel, true);
+		pcarObject->SetChild(pWhiteCubeModel, true);
 		pcarObject->OnInitialize();
 		pcarObject->SetScale(10.0f, 2.0f, 100.0f);
 		pcarObject->Rotate(0.0f, -180.0f, 0.0f);
@@ -162,9 +162,9 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 		pcarObject->SetScale(10.0f, 10.0f, 10.0f);
 		pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 		if (!(i % 2))
-			pcarObject->SetPosition(-260.0f, -10.0f, 750.0f - (i - 45) * 100.0f);
+			pcarObject->SetPosition(-260.0f, -10.0f, 750.0f - (i - 38) * 100.0f);
 		else
-			pcarObject->SetPosition(260.0f, -10.0f, 750.0f - (i - 46) * 100.0f);
+			pcarObject->SetPosition(260.0f, -10.0f, 750.0f - (i - 39) * 100.0f);
 		m_ppGameObjects[i] = pcarObject;
 	}
 
