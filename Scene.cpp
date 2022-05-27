@@ -85,7 +85,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetChild(pPlaneModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(+0.0f, 0.0f, 40.0f);
-	pcarObject->SetScale(50.0f, 100.0f, 100.0f);
+	pcarObject->SetScale(50.0f, 100.0f, 150.0f);
 	pcarObject->Rotate(0.0f, 90.0f, 0.0f);
 	m_ppGameObjects[0] = pcarObject;
 
@@ -95,7 +95,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 		pcarObject = new CCarObject();
 		pcarObject->SetChild(pRockModel, true);
 		pcarObject->OnInitialize();
-		pcarObject->SetScale(10.0f, 10.0f, 500.0f);
+		pcarObject->SetScale(10.0f, 10.0f, 600.0f);
 		if (i == 1) {
 			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
 			pcarObject->SetPosition(-250.0f, 0.0f, -150.0f);
@@ -106,11 +106,11 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 		}
 		else if (i == 3) {
 			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-			pcarObject->SetPosition(-250.0f, 0.0f, 350.0f);
+			pcarObject->SetPosition(-250.0f, 0.0f, 450.0f);
 		}
 		else {
 			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-			pcarObject->SetPosition(250.0f, 0.0f, 350.0f);
+			pcarObject->SetPosition(250.0f, 0.0f, 450.0f);
 		}
 		m_ppGameObjects[i] = pcarObject;
 	}
