@@ -435,36 +435,14 @@ void CGameFramework::ProcessInput()
 		DWORD dwDirection = 0;
 		if (pKeysBuffer['W'] & 0xF0) m_pPlayer->start = true;
 		else m_pPlayer->start = false;
-		//if (pKeysBuffer['S'] & 0xF0) dwDirection |= DIR_BACKWARD;
 		if (pKeysBuffer['A'] & 0xF0) dwDirection |= DIR_LEFT;
 		if (pKeysBuffer['D'] & 0xF0) dwDirection |= DIR_RIGHT;
-		if (pKeysBuffer[VK_UP] & 0xF0) dwDirection |= DIR_UP;
-		if (pKeysBuffer[VK_DOWN] & 0xF0) dwDirection |= DIR_DOWN;
 
-		float cxDelta = 0.0f, cyDelta = 0.0f;
-		POINT ptCursorPos;
-		if (GetCapture() == m_hWnd)
+		if (dwDirection)
 		{
-			SetCursor(NULL);
-			GetCursorPos(&ptCursorPos);
-			cxDelta = (float)(ptCursorPos.x - m_ptOldCursorPos.x) / 3.0f;
-			cyDelta = (float)(ptCursorPos.y - m_ptOldCursorPos.y) / 3.0f;
-			SetCursorPos(m_ptOldCursorPos.x, m_ptOldCursorPos.y);
-		}
-
-		if ((dwDirection != 0) || (cxDelta != 0.0f) || (cyDelta != 0.0f))
-		{
-			if (cxDelta || cyDelta)
-			{
-				if (pKeysBuffer[VK_RBUTTON] & 0xF0)
-					m_pPlayer->Rotate(cyDelta, 0.0f, -cxDelta);
-				else
-					m_pPlayer->Rotate(cyDelta, cxDelta, 0.0f);
-			}
-			if (dwDirection) {
-				//clamp();
-				m_pPlayer->Move(dwDirection, 30.0f, true);
-			}
+			float temp = (float)dwDirection / 5.0f;
+			//m_pPlayer->Rotate(0.0, temp, 0.0f);
+			m_pPlayer->Move(dwDirection, 30.0f, true);
 		}
 	}
 	m_pPlayer->Update(m_GameTimer.GetTimeElapsed());
@@ -478,7 +456,7 @@ void CGameFramework::AnimateObjects()
 
 	XMFLOAT3 temp = m_pPlayer->GetPosition();
 	if (temp.x <= -200.0f || temp.x >= 180.0f)
-		m_pPlayer->SetPosition(XMFLOAT3(std::clamp(temp.x, -230.0f, 210.0f), temp.y, temp.z));
+		m_pPlayer->SetPosition(XMFLOAT3(std::clamp(temp.x, -230.0f, 230.0f), temp.y, temp.z));
 	m_pPlayer->Animate(fTimeElapsed, NULL);
 }
 

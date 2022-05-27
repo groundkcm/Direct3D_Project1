@@ -25,7 +25,7 @@ void CScene::BuildDefaultLightsAndMaterials()
 	m_pLights[0].m_bEnable = true;
 	m_pLights[0].m_nType = POINT_LIGHT;
 	m_pLights[0].m_fRange = 1000.0f;
-	m_pLights[0].m_xmf4Ambient = XMFLOAT4(0.7f, 0.7f, 0.7f, 1.0f);	//없애던가
+	m_pLights[0].m_xmf4Ambient = XMFLOAT4(0.7f, 0.7f, 0.7f, 1.0f);
 	m_pLights[0].m_xmf4Diffuse = XMFLOAT4(0.7f, 0.7f, 0.7f, 1.0f);	
 	m_pLights[0].m_xmf4Specular = XMFLOAT4(0.1f, 0.1f, 0.1f, 0.0f);
 	m_pLights[0].m_xmf3Position = XMFLOAT3(30.0f, 30.0f, 30.0f);
@@ -129,9 +129,9 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pYellowCubeModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetScale(7.0f, 2.0f, 1000.0f);
+	pcarObject->SetScale(7.0f, 2.0f, 1200.0f);
 	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
-	pcarObject->SetPosition(0.0f, 0.0f, -50.0f);
+	pcarObject->SetPosition(0.0f, 0.0f, 150.0f);
 	m_ppGameObjects[5] = pcarObject;
 
 	CGameObject* pWhiteCubeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/WhiteCube.bin");
