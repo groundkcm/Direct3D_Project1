@@ -127,6 +127,7 @@ public:
 	CMaterial						**m_ppMaterials = NULL;
 
 	bool							start = false;
+	bool							lrmove = false;
 
 	XMFLOAT4X4						m_xmf4x4Transform;
 	XMFLOAT4X4						m_xmf4x4World;

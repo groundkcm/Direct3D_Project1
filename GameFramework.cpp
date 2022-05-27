@@ -435,15 +435,31 @@ void CGameFramework::ProcessInput()
 		DWORD dwDirection = 0;
 		if (pKeysBuffer['W'] & 0xF0) m_pPlayer->start = true;
 		else m_pPlayer->start = false;
-		if (pKeysBuffer['A'] & 0xF0) dwDirection |= DIR_LEFT;
-		if (pKeysBuffer['D'] & 0xF0) dwDirection |= DIR_RIGHT;
+		if (pKeysBuffer['A'] & 0xF0) {
+			m_pPlayer->lrmove = true;
+			dwDirection |= DIR_LEFT;
+		}
+		else m_pPlayer->lrmove = false;
+		if (pKeysBuffer['D'] & 0xF0) {
+			m_pPlayer->lrmove = true;
+			dwDirection |= DIR_RIGHT;
+		}
+		else m_pPlayer->lrmove = false;
 
+		static float rottemp;
 		if (dwDirection)
 		{
-			float temp = (float)dwDirection / 5.0f;
+			//float temp{ 0.2f };
+			////if (dwDirection && DIR_RIGHT) temp = -temp;
+			//temp = clamp(temp, -0.5f, 0.5f);
+			//rottemp += temp;
 			//m_pPlayer->Rotate(0.0, temp, 0.0f);
 			m_pPlayer->Move(dwDirection, 30.0f, true);
 		}
+		/*if (!(m_pPlayer->lrmove)) {
+			m_pPlayer->Rotate(0.0, -rottemp, 0.0f);
+			rottemp = 0.0f;
+		}*/
 	}
 	m_pPlayer->Update(m_GameTimer.GetTimeElapsed());
 }
@@ -456,7 +472,7 @@ void CGameFramework::AnimateObjects()
 
 	XMFLOAT3 temp = m_pPlayer->GetPosition();
 	if (temp.x <= -200.0f || temp.x >= 180.0f)
-		m_pPlayer->SetPosition(XMFLOAT3(std::clamp(temp.x, -230.0f, 230.0f), temp.y, temp.z));
+		m_pPlayer->SetPosition(XMFLOAT3(clamp(temp.x, -230.0f, 230.0f), temp.y, temp.z));
 	m_pPlayer->Animate(fTimeElapsed, NULL);
 }
 
