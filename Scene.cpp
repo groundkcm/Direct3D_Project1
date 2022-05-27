@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 #include <random>
-#define OBJECTNUM 34
+#define OBJECTNUM 52
 
 CScene::CScene()
 {
@@ -98,11 +98,11 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->Rotate(0.0f, 90.0f, 0.0f);
 	m_ppGameObjects[0] = pcarObject;
 
-	CGameObject* pRockModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Cube.bin");
+	CGameObject* pCubeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Cube.bin");
 
 	for (int i{ 1 }; i < 5; ++i) {
 		pcarObject = new CCarObject();
-		pcarObject->SetChild(pRockModel, true);
+		pcarObject->SetChild(pCubeModel, true);
 		pcarObject->OnInitialize();
 		pcarObject->SetScale(10.0f, 10.0f, 600.0f);
 		if (i == 1) {
@@ -124,30 +124,49 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 		m_ppGameObjects[i] = pcarObject;
 	}
 
+	CGameObject* pYellowCubeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/YellowCube.bin");
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pYellowCubeModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetScale(10.0f, 2.0f, 1000.0f);
+	pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(0.0f, 0.0f, -50.0f);
+	m_ppGameObjects[5] = pcarObject;
+
+	pCubeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Cube.bin");
+
+	for (int i{ 6 }; i < 38; ++i) {
+		pcarObject = new CCarObject();
+		pcarObject->SetChild(pCubeModel, true);
+		pcarObject->OnInitialize();
+		pcarObject->SetScale(10.0f, 2.0f, 100.0f);
+		pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+		if (i % 4 == 0)
+			pcarObject->SetPosition(-160.0f, 0.0f, -400.0f + (i - 6) * 50.0f);
+		else if (i % 4 == 1)
+			pcarObject->SetPosition(-80.0f, 0.0f, -400.0f + (i - 7) * 50.0f);
+		else if (i % 4 == 2)
+			pcarObject->SetPosition(80.0f, 0.0f, -400.0f + (i - 8) * 50.0f);
+		else
+			pcarObject->SetPosition(160.0f, 0.0f, -400.0f + (i - 9) * 50.0f);
+		m_ppGameObjects[i] = pcarObject;
+	}
+
 	CGameObject* pTreeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Tree.bin");
 
-	for (int i{ 5 }; i < 31; ++i) {
+	for (int i{ 38 }; i < 50; ++i) {
 		pcarObject = new CCarObject();
 		pcarObject->SetChild(pTreeModel, true);
 		pcarObject->OnInitialize();
 		pcarObject->SetScale(10.0f, 10.0f, 10.0f);
 		pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 		if (!(i % 2))
-			pcarObject->SetPosition(-260.0f, -10.0f, 750.0f - (i - 5) * 100.0f);
-		else 
-			pcarObject->SetPosition(260.0f, -10.0f, 750.0f - (i - 6) * 100.0f);
+			pcarObject->SetPosition(-260.0f, -10.0f, 750.0f - (i - 45) * 100.0f);
+		else
+			pcarObject->SetPosition(260.0f, -10.0f, 750.0f - (i - 46) * 100.0f);
 		m_ppGameObjects[i] = pcarObject;
 	}
-
-	CGameObject* pYellowCubeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/YellowCube.bin");
-
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pYellowCubeModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(0.0f, 0.0f, -100.0f);
-	pcarObject->SetScale(10.0f, 10.0f, 10.0f);
-	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[33] = pcarObject;
 
 	CGameObject* pAmbulanceModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Ambulance.bin");
 
@@ -158,7 +177,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-40.0f, 0.0f, -200.0f), XMFLOAT3(40.0f, 40.0f, 140.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[31] = pcarObject;
+	m_ppGameObjects[50] = pcarObject;
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
@@ -167,7 +186,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, -200.0f), XMFLOAT3(40.0f, 40.0f, 140.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[32] = pcarObject;
+	m_ppGameObjects[51] = pcarObject;
 
 
 	/*pcarObject = new CCarObject();
@@ -365,7 +384,7 @@ bool CScene::ProcessInput(UCHAR *pKeysBuffer)
 void CScene::CheckObjectByObjectCollisions()
 {
 	for (int i = 0; i < m_nGameObjects; i++) m_ppGameObjects[i]->m_pObjectCollided = NULL;
-	for (int i = 31; i < m_nGameObjects; i++)
+	for (int i = 50; i < m_nGameObjects; i++)
 	{
 		for (int j = (i + 1); j < m_nGameObjects; j++)
 		{
@@ -376,7 +395,7 @@ void CScene::CheckObjectByObjectCollisions()
 			}
 		}
 	}
-	for (int i = 31; i < m_nGameObjects; i++)
+	for (int i = 50; i < m_nGameObjects; i++)
 	{
 		if (m_ppGameObjects[i]->m_pObjectCollided)
 		{
@@ -419,17 +438,17 @@ void CScene::AnimateObjects(float fTimeElapsed)
 		default:
 			lane = 200.0f;
 		}
-		if (i >= 5 && m_pPlayer->start) {		// 랜덤위치 이동생성
+		if (i >= 6 && m_pPlayer->start) {		// 랜덤위치 이동생성
 			location = m_ppGameObjects[i]->GetPosition();
 			if (location.z < -450.0f) {
-				if (i < 31) 
+				if (i < 50) 
 					m_ppGameObjects[i]->SetPosition(location.x, 0.0f, 850.0f);
-				else if (i >= 31)
+				else if (i >= 50)
 					m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
 			}
-			if (i < 31)
+			if (i < 50)
 				m_ppGameObjects[i]->MoveForward(2.5f);
-			else if (i >= 31)
+			else if (i >= 50)
 				m_ppGameObjects[i]->MoveForward(4.0f);
 		}
 		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
