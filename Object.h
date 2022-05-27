@@ -126,9 +126,10 @@ public:
 	int								m_nMaterials = 0;
 	CMaterial						**m_ppMaterials = NULL;
 
+	bool							start = false;
+
 	XMFLOAT4X4						m_xmf4x4Transform;
 	XMFLOAT4X4						m_xmf4x4World;
-
 
 	BoundingOrientedBox				m_xmOOBB = BoundingOrientedBox();		// 바운딩 박스
 	CGameObject*					m_pObjectCollided = NULL;

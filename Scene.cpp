@@ -371,8 +371,8 @@ void CScene::CheckObjectByObjectCollisions()
 		{
 			if (m_ppGameObjects[i]->m_xmOOBB.Intersects(m_ppGameObjects[j]->m_xmOOBB))
 			{
-				m_ppGameObjects[i]->m_pObjectCollided = m_ppGameObjects[j];
-				m_ppGameObjects[j]->m_pObjectCollided = m_ppGameObjects[i];
+				//m_ppGameObjects[i]->m_pObjectCollided = m_ppGameObjects[j];
+				//m_ppGameObjects[j]->m_pObjectCollided = m_ppGameObjects[i];
 			}
 		}
 	}
@@ -419,12 +419,12 @@ void CScene::AnimateObjects(float fTimeElapsed)
 		default:
 			lane = 200.0f;
 		}
-		/*if (i >= 5) {		// 랜덤위치 이동생성
-			location = m_ppgameobjects[i]->getposition();
+		if (i >= 5 && m_pPlayer->start) {		// 랜덤위치 이동생성
+			location = m_ppGameObjects[i]->GetPosition();
 			if (location.z <= -450.0f)
-				m_ppgameobjects[i]->setposition(lane, 0.0f, 850.0f);
-			m_ppgameobjects[i]->moveforward(3.5f);
-		}*/
+				m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
+			m_ppGameObjects[i]->MoveForward(3.5f);
+		}
 		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
 	}
 
