@@ -379,12 +379,12 @@ void CScene::AnimateObjects(float fTimeElapsed)
 		default:
 			lane = 200.0f;
 		}
-		if (i >= 5) {
-			location = m_ppGameObjects[i]->GetPosition();
+		/*if (i >= 5) {		// 랜덤위치 이동생성
+			location = m_ppgameobjects[i]->getposition();
 			if (location.z <= -450.0f)
-				m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
-			m_ppGameObjects[i]->MoveForward(3.5f);
-		}
+				m_ppgameobjects[i]->setposition(lane, 0.0f, 850.0f);
+			m_ppgameobjects[i]->moveforward(3.5f);
+		}*/
 		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
 	}
 
