@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 #include <random>
-#define OBJECTNUM 52
+#define OBJECTNUM 44
 
 CScene::CScene()
 {
@@ -136,35 +136,35 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 
 	CGameObject* pWhiteCubeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/WhiteCube.bin");
 
-	for (int i{ 6 }; i < 38; ++i) {
+	for (int i{ 6 }; i < 30; ++i) {
 		pcarObject = new CCarObject();
 		pcarObject->SetChild(pWhiteCubeModel, true);
 		pcarObject->OnInitialize();
 		pcarObject->SetScale(10.0f, 2.0f, 100.0f);
 		pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-		if (i % 4 == 0)
-			pcarObject->SetPosition(-160.0f, 0.0f, -400.0f + (i - 6) * 50.0f);
-		else if (i % 4 == 1)
-			pcarObject->SetPosition(-80.0f, 0.0f, -400.0f + (i - 7) * 50.0f);
-		else if (i % 4 == 2)
-			pcarObject->SetPosition(80.0f, 0.0f, -400.0f + (i - 8) * 50.0f);
+		if (i % 4 == 2)
+			pcarObject->SetPosition(-160.0f, 0.0f, -400.0f + (i - 6) * 55.0f);
+		else if (i % 4 == 3)
+			pcarObject->SetPosition(-80.0f, 0.0f, -400.0f + (i - 7) * 55.0f);
+		else if (i % 4 == 0)
+			pcarObject->SetPosition(80.0f, 0.0f, -400.0f + (i - 8) * 55.0f);
 		else
-			pcarObject->SetPosition(160.0f, 0.0f, -400.0f + (i - 9) * 50.0f);
+			pcarObject->SetPosition(160.0f, 0.0f, -400.0f + (i - 9) * 55.0f);
 		m_ppGameObjects[i] = pcarObject;
 	}
 
 	CGameObject* pTreeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Tree.bin");
 
-	for (int i{ 38 }; i < 50; ++i) {
+	for (int i{ 30 }; i < 42; ++i) {
 		pcarObject = new CCarObject();
 		pcarObject->SetChild(pTreeModel, true);
 		pcarObject->OnInitialize();
 		pcarObject->SetScale(10.0f, 10.0f, 10.0f);
 		pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 		if (!(i % 2))
-			pcarObject->SetPosition(-260.0f, -10.0f, 750.0f - (i - 38) * 100.0f);
+			pcarObject->SetPosition(-260.0f, -10.0f, 750.0f - (i - 30) * 110.0f);
 		else
-			pcarObject->SetPosition(260.0f, -10.0f, 750.0f - (i - 39) * 100.0f);
+			pcarObject->SetPosition(260.0f, -10.0f, 750.0f - (i - 31) * 110.0f);
 		m_ppGameObjects[i] = pcarObject;
 	}
 
@@ -177,7 +177,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-40.0f, 0.0f, -200.0f), XMFLOAT3(40.0f, 40.0f, 140.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[50] = pcarObject;
+	m_ppGameObjects[42] = pcarObject;
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
@@ -186,7 +186,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
 	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, -200.0f), XMFLOAT3(40.0f, 40.0f, 140.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[51] = pcarObject;
+	m_ppGameObjects[43] = pcarObject;
 
 
 	/*pcarObject = new CCarObject();
@@ -384,18 +384,18 @@ bool CScene::ProcessInput(UCHAR *pKeysBuffer)
 void CScene::CheckObjectByObjectCollisions()
 {
 	for (int i = 0; i < m_nGameObjects; i++) m_ppGameObjects[i]->m_pObjectCollided = NULL;
-	for (int i = 50; i < m_nGameObjects; i++)
+	for (int i = 42; i < m_nGameObjects; i++)
 	{
 		for (int j = (i + 1); j < m_nGameObjects; j++)
 		{
 			if (m_ppGameObjects[i]->m_xmOOBB.Intersects(m_ppGameObjects[j]->m_xmOOBB))
 			{
-				m_ppGameObjects[i]->m_pObjectCollided = m_ppGameObjects[j];
-				m_ppGameObjects[j]->m_pObjectCollided = m_ppGameObjects[i];
+				//m_ppGameObjects[i]->m_pObjectCollided = m_ppGameObjects[j];
+				//m_ppGameObjects[j]->m_pObjectCollided = m_ppGameObjects[i];
 			}
 		}
 	}
-	for (int i = 50; i < m_nGameObjects; i++)
+	for (int i = 42; i < m_nGameObjects; i++)
 	{
 		if (m_ppGameObjects[i]->m_pObjectCollided)
 		{
@@ -441,14 +441,14 @@ void CScene::AnimateObjects(float fTimeElapsed)
 		if (i >= 6 && m_pPlayer->start) {		// 랜덤위치 이동생성
 			location = m_ppGameObjects[i]->GetPosition();
 			if (location.z < -450.0f) {
-				if (i < 50) 
+				if (i < 42) 
 					m_ppGameObjects[i]->SetPosition(location.x, 0.0f, 850.0f);
-				else if (i >= 50)
+				else if (i >= 42)
 					m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
 			}
-			if (i < 50)
+			if (i < 42)
 				m_ppGameObjects[i]->MoveForward(2.5f);
-			else if (i >= 50)
+			else if (i >= 42)
 				m_ppGameObjects[i]->MoveForward(4.0f);
 		}
 		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
