@@ -16,7 +16,7 @@ CScene::~CScene()
 
 void CScene::BuildDefaultLightsAndMaterials()
 {
-	m_nLights = 4;
+	m_nLights = 5;
 	m_pLights = new LIGHT[m_nLights];
 	::ZeroMemory(m_pLights, sizeof(LIGHT) * m_nLights);
 
@@ -34,7 +34,7 @@ void CScene::BuildDefaultLightsAndMaterials()
 	m_pLights[1].m_bEnable = true;
 	m_pLights[1].m_nType = SPOT_LIGHT;
 	m_pLights[1].m_fRange = 500.0f;
-	m_pLights[1].m_xmf4Ambient = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);
+	m_pLights[1].m_xmf4Ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	m_pLights[1].m_xmf4Diffuse = XMFLOAT4(0.4f, 0.4f, 0.4f, 1.0f);
 	m_pLights[1].m_xmf4Specular = XMFLOAT4(0.3f, 0.3f, 0.3f, 0.0f);
 	m_pLights[1].m_xmf3Position = XMFLOAT3(-50.0f, 20.0f, -5.0f);
@@ -61,6 +61,15 @@ void CScene::BuildDefaultLightsAndMaterials()
 	m_pLights[3].m_fFalloff = 8.0f;
 	m_pLights[3].m_fPhi = (float)cos(XMConvertToRadians(90.0f));
 	m_pLights[3].m_fTheta = (float)cos(XMConvertToRadians(30.0f));
+	m_pLights[4].m_bEnable = true;
+	m_pLights[4].m_nType = POINT_LIGHT;
+	m_pLights[4].m_fRange = 800.0f;
+	m_pLights[4].m_xmf4Ambient = XMFLOAT4(0.7f, 0.7f, 0.7f, 1.0f);
+	m_pLights[4].m_xmf4Diffuse = XMFLOAT4(0.7f, 0.7f, 0.7f, 1.0f);
+	m_pLights[4].m_xmf4Specular = XMFLOAT4(0.1f, 0.1f, 0.1f, 0.0f);
+	m_pLights[4].m_xmf3Position = XMFLOAT3(30.0f, 30.0f, 30.0f);
+	m_pLights[4].m_xmf3Direction = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	m_pLights[4].m_xmf3Attenuation = XMFLOAT3(1.0f, 0.001f, 0.0001f);
 }
 
 random_device rd;
@@ -392,6 +401,8 @@ void CScene::AnimateObjects(float fTimeElapsed)
 	{
 		m_pLights[1].m_xmf3Position = m_pPlayer->GetPosition();
 		m_pLights[1].m_xmf3Direction = m_pPlayer->GetLookVector();
+		m_pLights[4].m_xmf3Position = XMFLOAT3(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y + 30.0f, m_pPlayer->GetPosition().z);
+		m_pLights[4].m_xmf3Direction = m_pPlayer->GetPosition();
 	}
 }
 
