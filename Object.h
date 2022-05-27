@@ -129,6 +129,10 @@ public:
 	XMFLOAT4X4						m_xmf4x4Transform;
 	XMFLOAT4X4						m_xmf4x4World;
 
+
+	BoundingOrientedBox				m_xmOOBB = BoundingOrientedBox();		// 바운딩 박스
+	CGameObject*					m_pObjectCollided = NULL;
+
 	CGameObject 					*m_pParent = NULL;
 	CGameObject 					*m_pChild = NULL;
 	CGameObject 					*m_pSibling = NULL;
@@ -139,6 +143,8 @@ public:
 	void SetMaterial(int nMaterial, CMaterial *pMaterial);
 
 	void SetChild(CGameObject* pChild, bool bReferenceUpdate = false);
+
+	void UpdateBoundingBox();
 
 	virtual void BuildMaterials(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *pd3dCommandList) { }
 
