@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 #include <random>
-#define OBJECTNUM 15
+#define OBJECTNUM 7
 
 CScene::CScene()
 {
@@ -25,12 +25,12 @@ void CScene::BuildDefaultLightsAndMaterials()
 	m_pLights[0].m_bEnable = true;
 	m_pLights[0].m_nType = POINT_LIGHT;
 	m_pLights[0].m_fRange = 1000.0f;
-	m_pLights[0].m_xmf4Ambient = XMFLOAT4(0.7f, 0.7f, 0.7f, 1.0f);
-	m_pLights[0].m_xmf4Diffuse = XMFLOAT4(0.7f, 0.7f, 0.7f, 1.0f);		//라이트 색 바꾸기
+	m_pLights[0].m_xmf4Ambient = XMFLOAT4(0.7f, 0.7f, 0.7f, 1.0f);	//없애던가
+	m_pLights[0].m_xmf4Diffuse = XMFLOAT4(0.7f, 0.7f, 0.7f, 1.0f);	
 	m_pLights[0].m_xmf4Specular = XMFLOAT4(0.1f, 0.1f, 0.1f, 0.0f);
 	m_pLights[0].m_xmf3Position = XMFLOAT3(30.0f, 30.0f, 30.0f);
-	m_pLights[0].m_xmf3Direction = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	m_pLights[0].m_xmf3Attenuation = XMFLOAT3(1.0f, 0.001f, 0.0001f);
+	m_pLights[0].m_xmf3Direction = XMFLOAT3(0.0f, 15.0f, 500.0f);
+	m_pLights[0].m_xmf3Attenuation = XMFLOAT3(1.0f, 0.01f, 0.0001f);
 	m_pLights[1].m_bEnable = true;
 	m_pLights[1].m_nType = SPOT_LIGHT;
 	m_pLights[1].m_fRange = 500.0f;
@@ -124,25 +124,53 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 		m_ppGameObjects[i] = pcarObject;
 	}
 
+	/*CGameObject* pTreeModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Tree.bin");
+
+	for (int i{ 1 }; i < 5; ++i) {
+		pcarObject = new CCarObject();
+		pcarObject->SetChild(pTreeModel, true);
+		pcarObject->OnInitialize();
+		pcarObject->SetScale(10.0f, 10.0f, 600.0f);
+		if (i == 1) {
+			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+			pcarObject->SetPosition(-250.0f, 0.0f, -150.0f);
+		}
+		else if (i == 2) {
+			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+			pcarObject->SetPosition(250.0f, 0.0f, -150.0f);
+		}
+		else if (i == 3) {
+			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+			pcarObject->SetPosition(-250.0f, 0.0f, 450.0f);
+		}
+		else {
+			pcarObject->Rotate(0.0f, 0.0f, 0.0f);
+			pcarObject->SetPosition(250.0f, 0.0f, 450.0f);
+		}
+		m_ppGameObjects[i] = pcarObject;
+	}*/
+
 	CGameObject* pAmbulanceModel = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature, "Model/Ambulance.bin");
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-200.0f, 0.0f, 0.0f);
+	pcarObject->SetPosition(-40.0f, 0.0f, -200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-40.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 40.0f, 140.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[5] = pcarObject;
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(120.0f, 0.0f, 200.0f);
+	pcarObject->SetPosition(40.0f, 0.0f, -200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 40.0f, 140.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[6] = pcarObject;
 
-	pcarObject = new CCarObject();
+	/*pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-40.0f, 0.0f, -100.0f);
@@ -210,7 +238,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(200.0f, 0.0f, 300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[14] = pcarObject;
+	m_ppGameObjects[14] = pcarObject;*/
 
 
 	CreateShaderVariables(pd3dDevice, pd3dCommandList);
@@ -337,7 +365,7 @@ bool CScene::ProcessInput(UCHAR *pKeysBuffer)
 void CScene::CheckObjectByObjectCollisions()
 {
 	for (int i = 0; i < m_nGameObjects; i++) m_ppGameObjects[i]->m_pObjectCollided = NULL;
-	for (int i = 0; i < m_nGameObjects; i++)
+	for (int i = 5; i < m_nGameObjects; i++)
 	{
 		for (int j = (i + 1); j < m_nGameObjects; j++)
 		{
@@ -348,14 +376,17 @@ void CScene::CheckObjectByObjectCollisions()
 			}
 		}
 	}
-	for (int i = 0; i < m_nGameObjects; i++)
+	for (int i = 5; i < m_nGameObjects; i++)
 	{
 		if (m_ppGameObjects[i]->m_pObjectCollided)
 		{
 			XMFLOAT3 xmf3GetPos1 = m_ppGameObjects[i]->GetPosition();
 			XMFLOAT3 xmf3GetPos2 = m_ppGameObjects[i]->m_pObjectCollided->GetPosition();
-			m_ppGameObjects[i]->SetPosition(xmf3GetPos2);
-			m_ppGameObjects[i]->m_pObjectCollided->SetPosition(xmf3GetPos1.x + 80.0f, xmf3GetPos1.y, xmf3GetPos1.z);
+			m_ppGameObjects[i]->SetPosition(xmf3GetPos1);
+			if (xmf3GetPos1.x >= xmf3GetPos2.x)
+				m_ppGameObjects[i]->m_pObjectCollided->SetPosition(xmf3GetPos2.x -80.0f, xmf3GetPos2.y, xmf3GetPos2.z);
+			else if (xmf3GetPos1.x <= xmf3GetPos2.x)
+				m_ppGameObjects[i]->m_pObjectCollided->SetPosition(xmf3GetPos2.x + 80.0f, xmf3GetPos2.y, xmf3GetPos2.z);
 			m_ppGameObjects[i]->m_pObjectCollided->m_pObjectCollided = NULL;
 			m_ppGameObjects[i]->m_pObjectCollided = NULL;
 		}
@@ -401,9 +432,11 @@ void CScene::AnimateObjects(float fTimeElapsed)
 	{
 		m_pLights[1].m_xmf3Position = m_pPlayer->GetPosition();
 		m_pLights[1].m_xmf3Direction = m_pPlayer->GetLookVector();
-		m_pLights[4].m_xmf3Position = XMFLOAT3(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y + 30.0f, m_pPlayer->GetPosition().z);
+		m_pLights[4].m_xmf3Position = XMFLOAT3(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y + 30.0f, m_pPlayer->GetPosition().z + 50.0f);
 		m_pLights[4].m_xmf3Direction = m_pPlayer->GetPosition();
 	}
+
+	CheckObjectByObjectCollisions();
 }
 
 void CScene::Render(ID3D12GraphicsCommandList *pd3dCommandList, CCamera *pCamera)
