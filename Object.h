@@ -134,6 +134,7 @@ public:
 
 	BoundingOrientedBox				m_xmOOBB = BoundingOrientedBox();		// 바운딩 박스
 	CGameObject*					m_pObjectCollided = NULL;
+	bool							m_pPlayerCollided = false;
 
 	CGameObject 					*m_pParent = NULL;
 	CGameObject 					*m_pChild = NULL;
