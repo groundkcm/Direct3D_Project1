@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 #include <random>
+#include <array>
 #define OBJECTNUM 44
 
 CScene::CScene()
@@ -185,10 +186,10 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(40.0f, 0.0f, -100.0f);
+	pcarObject->SetPosition(40.0f, 0.0f, -200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, -100.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[43] = pcarObject;
 
 	//pcarObject = new CCarObject();
@@ -385,19 +386,26 @@ void CScene::CheckObjectByObjectCollisions()
 			}
 		}
 	}
+	static int count[2];
 	for (int i = 42; i < m_nGameObjects; i++)
 	{
 		if (m_ppGameObjects[i]->m_pObjectCollided)
 		{
 			XMFLOAT3 xmf3GetPos1 = m_ppGameObjects[i]->GetPosition();
 			XMFLOAT3 xmf3GetPos2 = m_ppGameObjects[i]->m_pObjectCollided->GetPosition();
-			m_ppGameObjects[i]->SetPosition(xmf3GetPos1);
 			if (xmf3GetPos1.x >= xmf3GetPos2.x)
-				m_ppGameObjects[i]->m_pObjectCollided->SetPosition(xmf3GetPos2.x -10.0f, xmf3GetPos2.y, xmf3GetPos2.z);
-			else if (xmf3GetPos1.x <= xmf3GetPos2.x)
-				m_ppGameObjects[i]->m_pObjectCollided->SetPosition(xmf3GetPos2.x + 10.0f, xmf3GetPos2.y, xmf3GetPos2.z);
+				m_ppGameObjects[i]->SetPosition(xmf3GetPos1.x + 5.0f, xmf3GetPos1.y + 1.0f, xmf3GetPos1.z);
+			else if (xmf3GetPos1.x < xmf3GetPos2.x)
+				m_ppGameObjects[i]->SetPosition(xmf3GetPos1.x - 5.0f, xmf3GetPos1.y + 1.0f, xmf3GetPos1.z);
+			//m_ppGameObjects[i]->Rotate(0.0f, 0.0f, 10.0f);
+			++count[i - 42];
 			m_ppGameObjects[i]->m_pObjectCollided->m_pObjectCollided = NULL;
 			m_ppGameObjects[i]->m_pObjectCollided = NULL;
+			if (count[i - 42] == 35) {
+				m_ppGameObjects[i]->SetPosition(xmf3GetPos1.x, 0.0f, 850.0f);
+				m_ppGameObjects[i]->m_pObjectCollided = NULL;
+				count[i - 42] = 0;
+			}
 		}
 	}
 }
