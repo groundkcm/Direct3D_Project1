@@ -198,7 +198,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(120.0f, 0.0f, 100.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 100.0f), XMFLOAT3(35.0f, 20.0f, 100.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 100.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[44] = pcarObject;
 
 	pcarObject = new CCarObject();
@@ -207,7 +207,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(200.0f, 0.0f, 300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(200.0f, 0.0f, 300.0f), XMFLOAT3(35.0f, 20.0f, 110.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(200.0f, 0.0f, 300.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[45] = pcarObject;
 
 	pcarObject = new CCarObject();
@@ -216,7 +216,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(120.0f, 0.0f, 0.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 10.0f, 50.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 10.0f, 20.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[46] = pcarObject;
 
 	//-------------------------------------- 방향전환
@@ -227,7 +227,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(-120.0f, 0.0f, 100.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-120.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 140.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-120.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[47] = pcarObject;
 
 
@@ -237,7 +237,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(-40.0f, 0.0f, 200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-40.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 100.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-40.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[48] = pcarObject;
 
 	pcarObject = new CCarObject();
@@ -246,7 +246,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(-200.0f, 0.0f, -200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-200.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 20.0f, 100.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-200.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[49] = pcarObject;
 
 
