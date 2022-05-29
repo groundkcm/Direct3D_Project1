@@ -424,15 +424,15 @@ void CScene::Collision()
 			}
 			if (m_ppGameObjects[i]->rcrash) {
 				//m_ppGameObjects[i]->Rotate(10.0f, 0.0f, 0.0f);
-				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x - 2.0f, m_ppGameObjects[i]->GetPosition().y + 1.0f, m_ppGameObjects[i]->GetPosition().z);
+				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x - 1.0f, m_ppGameObjects[i]->GetPosition().y + 2.0f, m_ppGameObjects[i]->GetPosition().z);
 			}
 			else if (m_ppGameObjects[i]->lcrash) {
 				//m_ppGameObjects[i]->Rotate(10.0f, 0.0f, 0.0f);
-				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x + 2.0f, m_ppGameObjects[i]->GetPosition().y + 1.0f, m_ppGameObjects[i]->GetPosition().z);
+				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x + 1.0f, m_ppGameObjects[i]->GetPosition().y + 2.0f, m_ppGameObjects[i]->GetPosition().z);
 			}
 			++(m_ppGameObjects[i]->crashnum);
 		}
-		if (m_ppGameObjects[i]->m_pObjectCollided) {
+		if (m_ppGameObjects[i]->m_pObjectCollided && (m_ppGameObjects[i]->GetPosition().z >= 700.0f)) {
 			if (i < 47)
 				m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
 			else
