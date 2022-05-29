@@ -372,45 +372,6 @@ bool CScene::ProcessInput(UCHAR *pKeysBuffer)
 	return(false);
 }
 
-void CScene::CheckObjectByObjectCollisions()
-{
-	for (int i = 0; i < m_nGameObjects; i++) m_ppGameObjects[i]->m_pObjectCollided = NULL;
-	for (int i = 42; i < m_nGameObjects; i++)
-	{
-		for (int j = (i + 1); j < m_nGameObjects; j++)
-		{
-			if (m_ppGameObjects[i]->m_xmOOBB.Intersects(m_ppGameObjects[j]->m_xmOOBB))
-			{
-				//m_ppGameObjects[i]->m_pObjectCollided = m_ppGameObjects[j];
-				//m_ppGameObjects[j]->m_pObjectCollided = m_ppGameObjects[i];
-			}
-		}
-	}
-	static int count[2];
-	for (int i = 42; i < m_nGameObjects; i++)
-	{
-		if (m_ppGameObjects[i]->m_pObjectCollided)
-		{
-			XMFLOAT3 xmf3GetPos1 = m_ppGameObjects[i]->GetPosition();
-			XMFLOAT3 xmf3GetPos2 = m_ppGameObjects[i]->m_pObjectCollided->GetPosition();
-			if (xmf3GetPos1.x >= xmf3GetPos2.x)
-				m_ppGameObjects[i]->SetPosition(xmf3GetPos1.x + 5.0f, xmf3GetPos1.y + 1.0f, xmf3GetPos1.z);
-			else if (xmf3GetPos1.x < xmf3GetPos2.x)
-				m_ppGameObjects[i]->SetPosition(xmf3GetPos1.x - 5.0f, xmf3GetPos1.y + 1.0f, xmf3GetPos1.z);
-			//m_ppGameObjects[i]->Rotate(0.0f, 0.0f, 10.0f);
-			++count[i - 42];
-			m_ppGameObjects[i]->m_pObjectCollided->m_pObjectCollided = NULL;
-			m_ppGameObjects[i]->m_pObjectCollided = NULL;
-			if (count[i - 42] == 35) {
-				m_ppGameObjects[i]->SetPosition(xmf3GetPos1.x, 0.0f, 850.0f);
-				m_ppGameObjects[i]->m_pObjectCollided = NULL;
-				count[i - 42] = 0;
-			}
-		}
-	}
-}
-
-
 void CScene::Collision()
 {
 	m_pPlayer->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(m_pPlayer->GetPosition()), XMFLOAT3(30.0f, 20.0f, 35.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
@@ -528,7 +489,6 @@ void CScene::AnimateObjects(float fTimeElapsed)
 	}
 
 	Collision();
-	//CheckObjectByObjectCollisions();
 }
 
 void CScene::Render(ID3D12GraphicsCommandList *pd3dCommandList, CCamera *pCamera)
