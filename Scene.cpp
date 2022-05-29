@@ -5,7 +5,7 @@
 #include "Scene.h"
 #include <random>
 #include <array>
-#define OBJECTNUM 50
+#define OBJECTNUM 44
 
 CScene::CScene()
 {
@@ -186,68 +186,68 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
-	pcarObject->SetPosition(40.0f, 0.0f, -200.0f);
+	pcarObject->SetPosition(40.0f, 0.0f, 200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, 200.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[43] = pcarObject;
 
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pPoliceCarModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(120.0f, 0.0f, 100.0f);
-	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 100.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[44] = pcarObject;
-
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pOldCarModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(200.0f, 0.0f, 300.0f);
-	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(200.0f, 0.0f, 300.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[45] = pcarObject;
-
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pForkModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(120.0f, 0.0f, 0.0f);
-	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 10.0f, 20.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[46] = pcarObject;
-
-	//-------------------------------------- 방향전환
-
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pAmbulanceModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-120.0f, 0.0f, 100.0f);
-	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	//pcarObject = new CCarObject();
+	//pcarObject->SetChild(pPoliceCarModel, true);
+	//pcarObject->OnInitialize();
+	//pcarObject->SetPosition(120.0f, 0.0f, 100.0f);
+	//pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-120.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[47] = pcarObject;
+	//pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 100.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	//m_ppGameObjects[44] = pcarObject;
 
-
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pPoliceCarModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-40.0f, 0.0f, 200.0f);
-	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	//pcarObject = new CCarObject();
+	//pcarObject->SetChild(pOldCarModel, true);
+	//pcarObject->OnInitialize();
+	//pcarObject->SetPosition(200.0f, 0.0f, 300.0f);
+	//pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-40.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[48] = pcarObject;
+	//pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(200.0f, 0.0f, 300.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	//m_ppGameObjects[45] = pcarObject;
 
-	pcarObject = new CCarObject();
-	pcarObject->SetChild(pOldCarModel, true);
-	pcarObject->OnInitialize();
-	pcarObject->SetPosition(-200.0f, 0.0f, -200.0f);
-	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	//pcarObject = new CCarObject();
+	//pcarObject->SetChild(pForkModel, true);
+	//pcarObject->OnInitialize();
+	//pcarObject->SetPosition(120.0f, 0.0f, 0.0f);
+	//pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-200.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_ppGameObjects[49] = pcarObject;
+	//pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 10.0f, 20.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	//m_ppGameObjects[46] = pcarObject;
+
+	////-------------------------------------- 방향전환
+
+	//pcarObject = new CCarObject();
+	//pcarObject->SetChild(pAmbulanceModel, true);
+	//pcarObject->OnInitialize();
+	//pcarObject->SetPosition(-120.0f, 0.0f, 100.0f);
+	//pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	////pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	//pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-120.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	//m_ppGameObjects[47] = pcarObject;
+
+
+	//pcarObject = new CCarObject();
+	//pcarObject->SetChild(pPoliceCarModel, true);
+	//pcarObject->OnInitialize();
+	//pcarObject->SetPosition(-40.0f, 0.0f, 200.0f);
+	//pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	////pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	//pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-40.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	//m_ppGameObjects[48] = pcarObject;
+
+	//pcarObject = new CCarObject();
+	//pcarObject->SetChild(pOldCarModel, true);
+	//pcarObject->OnInitialize();
+	//pcarObject->SetPosition(-200.0f, 0.0f, -200.0f);
+	//pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	////pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	//pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-200.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	//m_ppGameObjects[49] = pcarObject;
 
 
 
@@ -438,6 +438,30 @@ void CScene::CheckPlayerByObjectCollisions()
 	}*/
 }
 
+void CScene::Collision()
+{
+	m_pPlayer->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(m_pPlayer->GetPosition()), XMFLOAT3(30.0f, 20.0f, 35.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	m_pPlayer->m_pObjectCollided = NULL;
+
+	for (int i = 42; i < m_nGameObjects; ++i) {
+		m_ppGameObjects[i]->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(m_ppGameObjects[i]->GetPosition()), XMFLOAT3(30.0f, 20.0f, 35.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+		m_ppGameObjects[i]->m_pObjectCollided = NULL;
+	}
+
+	for (int i = 42; i < m_nGameObjects; ++i) {
+		if (m_ppGameObjects[i]->m_xmOOBB.Intersects(m_pPlayer->m_xmOOBB)) {
+			m_ppGameObjects[i]->m_pObjectCollided = m_pPlayer;
+			m_pPlayer->m_pObjectCollided = m_ppGameObjects[i];
+		}
+	}
+
+	//for (int i = 42; i < m_nGameObjects; ++i) {
+	if (m_pPlayer->m_pObjectCollided) {
+		m_pPlayer->m_pObjectCollided->SetPosition(XMFLOAT3(0.0f, 0.0f, 0.0f));
+	}
+	//}
+}
+
 void CScene::AnimateObjects(float fTimeElapsed)
 {
 	m_fElapsedTime = fTimeElapsed;
@@ -484,7 +508,8 @@ void CScene::AnimateObjects(float fTimeElapsed)
 		m_pLights[4].m_xmf3Direction = m_pPlayer->GetPosition();
 	}
 
-	CheckObjectByObjectCollisions();
+	Collision();
+	//CheckObjectByObjectCollisions();
 }
 
 void CScene::Render(ID3D12GraphicsCommandList *pd3dCommandList, CCamera *pCamera)

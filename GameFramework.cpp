@@ -436,15 +436,15 @@ void CGameFramework::ProcessInput()
 		if (pKeysBuffer['W'] & 0xF0) m_pPlayer->start = true;
 		else m_pPlayer->start = false;
 		if (pKeysBuffer['A'] & 0xF0) {
-			m_pPlayer->lrmove = true;
+			//m_pPlayer->lrmove = true;
 			dwDirection |= DIR_LEFT;
 		}
-		else m_pPlayer->lrmove = false;
+		//else m_pPlayer->lrmove = false;
 		if (pKeysBuffer['D'] & 0xF0) {
-			m_pPlayer->lrmove = true;
+			//m_pPlayer->lrmove = true;
 			dwDirection |= DIR_RIGHT;
 		}
-		else m_pPlayer->lrmove = false;
+		//else m_pPlayer->lrmove = false;
 
 		static float rottemp;
 		if (dwDirection)
