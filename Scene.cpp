@@ -350,7 +350,7 @@ void CScene::Collision()
 	m_pPlayer->m_pObjectCollided = NULL;
 
 	for (int i = 42; i < m_nGameObjects; ++i) {
-		m_ppGameObjects[i]->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(m_ppGameObjects[i]->GetPosition()), XMFLOAT3(25.0f, 10.0f, 35.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+		m_ppGameObjects[i]->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(m_ppGameObjects[i]->GetPosition()), XMFLOAT3(20.0f, 10.0f, 35.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 		m_ppGameObjects[i]->m_pObjectCollided = NULL;
 	}
 
@@ -385,7 +385,7 @@ void CScene::Collision()
 			lane = 40.0f;
 		}
 		if (m_ppGameObjects[i]->lcrash || m_ppGameObjects[i]->rcrash) {
-			if (m_ppGameObjects[i]->crashnum >= 36) {
+			if (m_ppGameObjects[i]->crashnum > 36) {
 				m_ppGameObjects[i]->crashnum = 0;
 				m_ppGameObjects[i]->lcrash = false;
 				m_ppGameObjects[i]->rcrash = false;
@@ -395,12 +395,12 @@ void CScene::Collision()
 					m_ppGameObjects[i]->SetPosition(-lane, 0.0f, 850.0f);
 			}
 			if (m_ppGameObjects[i]->rcrash) {
-				//m_ppGameObjects[i]->Rotate(10.0f, 0.0f, 0.0f);
-				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x - 1.0f, m_ppGameObjects[i]->GetPosition().y + 2.0f, m_ppGameObjects[i]->GetPosition().z);
+				//m_ppGameObjects[i]->Rotate(0.0f, 0.0f, 10.0f);
+				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x - 2.5f, m_ppGameObjects[i]->GetPosition().y + 2.0f, m_ppGameObjects[i]->GetPosition().z);
 			}
 			else if (m_ppGameObjects[i]->lcrash) {
-				//m_ppGameObjects[i]->Rotate(10.0f, 0.0f, 0.0f);
-				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x + 1.0f, m_ppGameObjects[i]->GetPosition().y + 2.0f, m_ppGameObjects[i]->GetPosition().z);
+				//m_ppGameObjects[i]->Rotate(0.0f, 0.0f, 10.0f);
+				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x + 2.5f, m_ppGameObjects[i]->GetPosition().y + 2.0f, m_ppGameObjects[i]->GetPosition().z);
 			}
 			++(m_ppGameObjects[i]->crashnum);
 		}

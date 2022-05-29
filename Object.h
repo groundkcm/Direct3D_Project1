@@ -127,7 +127,6 @@ public:
 	CMaterial						**m_ppMaterials = NULL;
 
 	bool							start = false;
-	bool							lrmove = false;
 	bool							lcrash = false;
 	bool							rcrash = false;
 	int								crashnum = 0;
