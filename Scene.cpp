@@ -421,15 +421,12 @@ void CScene::Collision()
 		m_ppGameObjects[i]->m_pObjectCollided = NULL;
 	}
 
-	//static vector<CGameObject*> v(OBJECTNUM - 42);
 	for (int i = 42; i < m_nGameObjects; ++i) {
 		if (m_ppGameObjects[i]->m_xmOOBB.Intersects(m_pPlayer->m_xmOOBB)) {
 			if (m_pPlayer->GetPosition().x >= m_ppGameObjects[i]->GetPosition().x)
 				m_ppGameObjects[i]->rcrash = true;
 			else if (m_pPlayer->GetPosition().x < m_ppGameObjects[i]->GetPosition().x) 
 				m_ppGameObjects[i]->lcrash = true;
-			//m_pPlayer->m_pObjectCollided = m_ppGameObjects[i];
-			//v.push_back(m_ppGameObjects[i]);
 		}
 		for (int j = (i + 1); j < m_nGameObjects; j++)
 		{
@@ -441,42 +438,40 @@ void CScene::Collision()
 		}
 	}
 
-	/*if (m_pPlayer->m_pObjectCollided) {
-		m_pPlayer->m_pObjectCollided->SetPosition(XMFLOAT3(0.0f, 0.0f, 0.0f));
-	}*/
 	for (int i = 42; i < m_nGameObjects; ++i) {
 		if (m_ppGameObjects[i]->lcrash || m_ppGameObjects[i]->rcrash) {
-			if (m_ppGameObjects[i]->crashnum >= 40) {
+			int choice{ uid(dre) };
+			float lane{};
+			switch (choice) {
+			case 1:
+				lane = 200.0f;
+				break;
+			case 2:
+				lane = 120.0f;
+				break;
+			default:
+				lane = 40.0f;
+			}
+			if (m_ppGameObjects[i]->crashnum >= 36) {
 				m_ppGameObjects[i]->crashnum = 0;
 				m_ppGameObjects[i]->lcrash = false;
 				m_ppGameObjects[i]->rcrash = false;
-				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x, 0.0f, 850.0f);
+				if (i < 47)
+					m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
+				else
+					m_ppGameObjects[i]->SetPosition(-lane, 0.0f, 850.0f);
 			}
 			if (m_ppGameObjects[i]->rcrash) {
+				m_ppGameObjects[i]->Rotate(0.0f, 0.0f, -10.0f);
 				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x - 2.0f, m_ppGameObjects[i]->GetPosition().y + 1.0f, m_ppGameObjects[i]->GetPosition().z);
 			}
 			else if (m_ppGameObjects[i]->lcrash) {
+				m_ppGameObjects[i]->Rotate(0.0f, 0.0f, 10.0f);
 				m_ppGameObjects[i]->SetPosition(m_ppGameObjects[i]->GetPosition().x + 2.0f, m_ppGameObjects[i]->GetPosition().y + 1.0f, m_ppGameObjects[i]->GetPosition().z);
 			}
 			++(m_ppGameObjects[i]->crashnum);
 		}
 	}
-	//for (CGameObject* object : v) {
-	//	if (object->crash) {
-	//		/*if (object->crashnum >= 40) {
-	//			object->crashnum = 0;
-	//			object->crash = false;
-	//			object->SetPosition(object->GetPosition().x, 0.0f, 850.0f);
-	//		}
-	//		if (m_pPlayer->GetPosition().x >= object->GetPosition().x) {
-	//			object->SetPosition(object->GetPosition().x - 5.0f, object->GetPosition().y + 1.0f, object->GetPosition().z);
-	//		}
-	//		else if (m_pPlayer->GetPosition().x >= object->GetPosition().x) {
-	//			object->SetPosition(object->GetPosition().x + 5.0f, object->GetPosition().y + 1.0f, object->GetPosition().z);
-	//		}*/
-	//	}
-	//	++(object->crashnum);
-	//}
 	
 }
 
