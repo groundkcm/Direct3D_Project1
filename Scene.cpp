@@ -180,7 +180,6 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(40.0f, 0.0f, -200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[42] = pcarObject;
 
 	pcarObject = new CCarObject();
@@ -189,7 +188,6 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(40.0f, 0.0f, 200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(40.0f, 0.0f, 200.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[43] = pcarObject;
 
 	pcarObject = new CCarObject();
@@ -198,7 +196,6 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(120.0f, 0.0f, 100.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 100.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[44] = pcarObject;
 
 	pcarObject = new CCarObject();
@@ -207,7 +204,6 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(200.0f, 0.0f, 300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(200.0f, 0.0f, 300.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[45] = pcarObject;
 
 	pcarObject = new CCarObject();
@@ -216,18 +212,15 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(120.0f, 0.0f, 0.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(120.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 10.0f, 20.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[46] = pcarObject;
 
-	//-------------------------------------- 방향전환
+	//-------------------------------------- 순방향
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pAmbulanceModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-120.0f, 0.0f, 100.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-120.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 45.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[47] = pcarObject;
 
 
@@ -236,8 +229,6 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-40.0f, 0.0f, 200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-40.0f, 0.0f, 0.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[48] = pcarObject;
 
 	pcarObject = new CCarObject();
@@ -245,8 +236,6 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-200.0f, 0.0f, -200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	//pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	pcarObject->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(-200.0f, 0.0f, -200.0f), XMFLOAT3(35.0f, 20.0f, 30.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_ppGameObjects[49] = pcarObject;
 
 
@@ -346,24 +335,7 @@ bool CScene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam,
 
 bool CScene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam)
 {
-	/*switch (nMessageID)
-	{
-	case WM_KEYDOWN:
-		switch (wParam)
-		{
-		case 'W': m_ppGameObjects[0]->MoveForward(+1.0f); break;
-		case 'S': m_ppGameObjects[0]->MoveForward(-1.0f); break;
-		case 'A': m_ppGameObjects[0]->MoveStrafe(-1.0f); break;
-		case 'D': m_ppGameObjects[0]->MoveStrafe(+1.0f); break;
-		case 'Q': m_ppGameObjects[0]->MoveUp(+1.0f); break;
-		case 'R': m_ppGameObjects[0]->MoveUp(-1.0f); break;
-		default:
-			break;
-		}
-		break;
-	default:
-		break;
-	}*/
+	
 	return(false);
 }
 
@@ -374,11 +346,11 @@ bool CScene::ProcessInput(UCHAR *pKeysBuffer)
 
 void CScene::Collision()
 {
-	m_pPlayer->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(m_pPlayer->GetPosition()), XMFLOAT3(30.0f, 20.0f, 35.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+	m_pPlayer->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(m_pPlayer->GetPosition()), XMFLOAT3(25.0f, 10.0f, 35.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_pPlayer->m_pObjectCollided = NULL;
 
 	for (int i = 42; i < m_nGameObjects; ++i) {
-		m_ppGameObjects[i]->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(m_ppGameObjects[i]->GetPosition()), XMFLOAT3(30.0f, 20.0f, 35.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+		m_ppGameObjects[i]->m_xmOOBB = BoundingOrientedBox(XMFLOAT3(m_ppGameObjects[i]->GetPosition()), XMFLOAT3(25.0f, 10.0f, 35.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 		m_ppGameObjects[i]->m_pObjectCollided = NULL;
 	}
 

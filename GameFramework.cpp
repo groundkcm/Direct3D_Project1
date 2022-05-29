@@ -435,31 +435,11 @@ void CGameFramework::ProcessInput()
 		DWORD dwDirection = 0;
 		if (pKeysBuffer['W'] & 0xF0) m_pPlayer->start = true;
 		else m_pPlayer->start = false;
-		if (pKeysBuffer['A'] & 0xF0) {
-			//m_pPlayer->lrmove = true;
-			dwDirection |= DIR_LEFT;
-		}
-		//else m_pPlayer->lrmove = false;
-		if (pKeysBuffer['D'] & 0xF0) {
-			//m_pPlayer->lrmove = true;
-			dwDirection |= DIR_RIGHT;
-		}
-		//else m_pPlayer->lrmove = false;
+		if (pKeysBuffer['A'] & 0xF0) dwDirection |= DIR_LEFT;
+		if (pKeysBuffer['D'] & 0xF0) dwDirection |= DIR_RIGHT;
 
 		static float rottemp;
-		if (dwDirection)
-		{
-			//float temp{ 0.2f };
-			////if (dwDirection && DIR_RIGHT) temp = -temp;
-			//temp = clamp(temp, -0.5f, 0.5f);
-			//rottemp += temp;
-			//m_pPlayer->Rotate(0.0, temp, 0.0f);
-			m_pPlayer->Move(dwDirection, 30.0f, true);
-		}
-		/*if (!(m_pPlayer->lrmove)) {
-			m_pPlayer->Rotate(0.0, -rottemp, 0.0f);
-			rottemp = 0.0f;
-		}*/
+		if (dwDirection) m_pPlayer->Move(dwDirection, 30.0f, true);
 	}
 	m_pPlayer->Update(m_GameTimer.GetTimeElapsed());
 }
