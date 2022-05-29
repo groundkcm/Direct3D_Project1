@@ -5,7 +5,7 @@
 #include "Scene.h"
 #include <random>
 #include <array>
-#define OBJECTNUM 50
+#define OBJECTNUM 53
 
 CScene::CScene()
 {
@@ -199,12 +199,28 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	m_ppGameObjects[44] = pcarObject;
 
 	pcarObject = new CCarObject();
+	pcarObject->SetChild(pPoliceCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(40.0f, 0.0f, -100.0f);
+	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[45] = pcarObject;
+
+	pcarObject = new CCarObject();
 	pcarObject->SetChild(pOldCarModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(200.0f, 0.0f, 300.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[45] = pcarObject;
+	m_ppGameObjects[46] = pcarObject;
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pOldCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(200.0f, 0.0f, 0.0f);
+	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
+	m_ppGameObjects[47] = pcarObject;
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pForkModel, true);
@@ -212,7 +228,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->SetPosition(120.0f, 0.0f, 0.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
 	pcarObject->Rotate(0.0f, -180.0f, 0.0f);
-	m_ppGameObjects[46] = pcarObject;
+	m_ppGameObjects[48] = pcarObject;
 
 	//-------------------------------------- ¼ø¹æÇâ
 
@@ -221,7 +237,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-120.0f, 0.0f, 100.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	m_ppGameObjects[47] = pcarObject;
+	m_ppGameObjects[49] = pcarObject;
 
 
 	pcarObject = new CCarObject();
@@ -229,14 +245,21 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-40.0f, 0.0f, 200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	m_ppGameObjects[48] = pcarObject;
+	m_ppGameObjects[50] = pcarObject;
+
+	pcarObject = new CCarObject();
+	pcarObject->SetChild(pPoliceCarModel, true);
+	pcarObject->OnInitialize();
+	pcarObject->SetPosition(-40.0f, 0.0f, -100.0f);
+	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
+	m_ppGameObjects[51] = pcarObject;
 
 	pcarObject = new CCarObject();
 	pcarObject->SetChild(pOldCarModel, true);
 	pcarObject->OnInitialize();
 	pcarObject->SetPosition(-200.0f, 0.0f, -200.0f);
 	pcarObject->SetScale(15.0f, 15.0f, 15.0f);
-	m_ppGameObjects[49] = pcarObject;
+	m_ppGameObjects[52] = pcarObject;
 
 
 
@@ -389,7 +412,7 @@ void CScene::Collision()
 				m_ppGameObjects[i]->crashnum = 0;
 				m_ppGameObjects[i]->lcrash = false;
 				m_ppGameObjects[i]->rcrash = false;
-				if (i < 47)
+				if (i < 49)
 					m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
 				else
 					m_ppGameObjects[i]->SetPosition(-lane, 0.0f, 850.0f);
@@ -405,7 +428,7 @@ void CScene::Collision()
 			++(m_ppGameObjects[i]->crashnum);
 		}
 		if (m_ppGameObjects[i]->m_pObjectCollided && (m_ppGameObjects[i]->GetPosition().z >= 700.0f)) {
-			if (i < 47)
+			if (i < 49)
 				m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
 			else
 				m_ppGameObjects[i]->SetPosition(-lane, 0.0f, 850.0f);
@@ -436,14 +459,14 @@ void CScene::AnimateObjects(float fTimeElapsed)
 			if (location.z < -450.0f) {
 				if (i < 42)
 					m_ppGameObjects[i]->SetPosition(location.x, 0.0f, 850.0f);
-				else if (i < 47)
+				else if (i < 49)
 					m_ppGameObjects[i]->SetPosition(lane, 0.0f, 850.0f);
 				else 
 					m_ppGameObjects[i]->SetPosition(-lane, 0.0f, 850.0f);
 			}
 			if (i < 42)
 				m_ppGameObjects[i]->MoveForward(3.5f);
-			else if (i < 47)
+			else if (i < 49)
 				m_ppGameObjects[i]->MoveForward(5.5f);
 			else 
 				m_ppGameObjects[i]->MoveForward(-2.5f);
