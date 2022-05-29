@@ -55,7 +55,6 @@ public:
 	void ReleaseObjects();
 
 	void CheckObjectByObjectCollisions();
-	void CheckPlayerByObjectCollisions();
 	void Collision();
 
 	ID3D12RootSignature *CreateGraphicsRootSignature(ID3D12Device *pd3dDevice);
