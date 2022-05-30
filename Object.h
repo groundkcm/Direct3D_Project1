@@ -130,6 +130,8 @@ public:
 	bool							lcrash = false;
 	bool							rcrash = false;
 	int								crashnum = 0;
+	bool							booster = false;
+	int								bossternum = 0;
 
 	XMFLOAT4X4						m_xmf4x4Transform;
 	XMFLOAT4X4						m_xmf4x4World;

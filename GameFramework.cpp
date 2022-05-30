@@ -322,8 +322,6 @@ void CGameFramework::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPA
 				case VK_F9:
 					ChangeSwapChainState();
 					break;
-				case VK_F5:
-					break;
 				default:
 					break;
 			}
@@ -437,6 +435,7 @@ void CGameFramework::ProcessInput()
 		else m_pPlayer->start = false;
 		if (pKeysBuffer['A'] & 0xF0) dwDirection |= DIR_LEFT;
 		if (pKeysBuffer['D'] & 0xF0) dwDirection |= DIR_RIGHT;
+		if (pKeysBuffer[VK_SPACE] & 0xF0) m_pPlayer->booster = true;
 
 		static float rottemp;
 		if (dwDirection) m_pPlayer->Move(dwDirection, 30.0f, true);

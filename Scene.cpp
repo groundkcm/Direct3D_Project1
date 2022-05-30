@@ -365,7 +365,17 @@ bool CScene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam,
 
 bool CScene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam)
 {
-	
+	/*switch (nMessageID)
+	{
+	case WM_KEYDOWN:
+		switch (wParam)
+		{
+		case '1': m_pPlayer->booster = true; break;
+		}
+		break;
+	default:
+		break;
+	}*/
 	return(false);
 }
 
@@ -471,12 +481,27 @@ void CScene::AnimateObjects(float fTimeElapsed)
 				else 
 					m_ppGameObjects[i]->SetPosition(-lane, 0.0f, 850.0f);
 			}
-			if (i < 42)
-				m_ppGameObjects[i]->MoveForward(3.0f);
-			else if (i < 49)
-				m_ppGameObjects[i]->MoveForward(5.0f);
-			else 
-				m_ppGameObjects[i]->MoveForward(-2.0f);
+			if (m_pPlayer->booster) {
+				if (m_pPlayer->bossternum >= 150) {
+					m_pPlayer->booster = false;
+					m_pPlayer->bossternum = 0;
+				}
+				if (i < 42)
+					m_ppGameObjects[i]->MoveForward(6.0f);
+				else if (i < 49)
+					m_ppGameObjects[i]->MoveForward(8.0f);
+				else
+					m_ppGameObjects[i]->MoveForward(-5.0f);
+				m_pPlayer->bossternum += 1;
+			}
+			else {
+				if (i < 42)
+					m_ppGameObjects[i]->MoveForward(3.0f);
+				else if (i < 49)
+					m_ppGameObjects[i]->MoveForward(5.0f);
+				else
+					m_ppGameObjects[i]->MoveForward(-2.0f);
+			}
 			
 		}
 		m_ppGameObjects[i]->Animate(fTimeElapsed, NULL);
